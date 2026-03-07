@@ -1,0 +1,2063 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>My India Knowledge AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;width:100%;overflow:hidden;background:#050510;color:#FFF8F0;font-family:'Baloo 2',sans-serif;}
+
+/* ── LUXURY BG ── */
+#luxBg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background:radial-gradient(ellipse 80% 60% at 10% 10%,rgba(255,107,0,.13),transparent 55%),
+  radial-gradient(ellipse 70% 50% at 90% 90%,rgba(0,168,107,.1),transparent 55%),
+  radial-gradient(ellipse 50% 40% at 50% 50%,rgba(255,215,0,.05),transparent 55%),
+  radial-gradient(ellipse 40% 30% at 80% 20%,rgba(138,43,226,.08),transparent 50%);}
+#luxGrid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(255,107,0,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,107,0,.05) 1px,transparent 1px);
+  background-size:38px 38px;animation:gMove 18s linear infinite;}
+@keyframes gMove{to{background-position:38px 38px}}
+.particle{position:fixed;border-radius:50%;pointer-events:none;z-index:0;animation:pUp linear infinite;}
+@keyframes pUp{0%{transform:translateY(110vh) rotate(0);opacity:0}15%{opacity:1}85%{opacity:.7}100%{transform:translateY(-60px) rotate(720deg);opacity:0}}
+.nline{position:fixed;left:0;right:0;height:1px;z-index:0;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--nc,rgba(255,107,0,.3)),transparent);
+  animation:nSweep var(--nd,5s) ease-in-out infinite var(--nd2,0s);}
+@keyframes nSweep{0%,100%{opacity:0;transform:scaleX(0)}40%,60%{opacity:1;transform:scaleX(1)}}
+.tricolor{position:fixed;top:0;left:0;right:0;height:5px;z-index:9999;
+  background:linear-gradient(90deg,#FF6B00 33%,#fff 33%,#fff 66%,#00A86B 66%);
+  animation:tcGlow 2s ease-in-out infinite;}
+@keyframes tcGlow{0%,100%{box-shadow:0 0 10px rgba(255,107,0,.6),0 0 20px rgba(255,107,0,.3)}50%{box-shadow:0 0 30px rgba(255,107,0,1),0 0 60px rgba(255,215,0,.5),0 0 80px rgba(0,168,107,.3)}}
+
+/* ── SPLASH ── */
+#splash{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;overflow:hidden;}
+.sp-flag-bg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+.sp-flag-bg img{width:200px;opacity:.1;animation:flagWave 3s ease-in-out infinite;}
+@keyframes flagWave{0%,100%{transform:rotate(-2deg) scale(1)}50%{transform:rotate(2deg) scale(1.06)}}
+#spText{font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;letter-spacing:3px;text-align:center;line-height:1.5;position:relative;text-shadow:0 0 30px rgba(255,107,0,.5);}
+.ch{display:inline-block;opacity:0;animation:chIn .05s forwards;}
+@keyframes chIn{to{opacity:1}}
+.sp-robots{display:flex;gap:14px;margin:5px 0;}
+.sp-rb{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.sp-rb canvas{filter:drop-shadow(0 0 10px rgba(255,107,0,.5));}
+.sp-rb span{font-size:8px;font-weight:700;text-align:center;max-width:75px;
+  background:linear-gradient(90deg,#FF6B00,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.sp-made{font-size:10px;color:rgba(255,215,0,.45);text-align:center;}
+.bar-wrap{width:190px;height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;}
+.bar-fill{height:100%;width:0;background:linear-gradient(90deg,#FF6B00,#FFD700,#00A86B);}
+#spBtn{display:none;margin-top:5px;padding:11px 32px;
+  background:linear-gradient(135deg,#FF6B00,#CC3300);border:2px solid #FFD700;border-radius:50px;
+  color:#fff;font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;cursor:pointer;
+  animation:spGlow 1.5s ease-in-out infinite;}
+@keyframes spGlow{0%,100%{box-shadow:0 0 15px rgba(255,107,0,.5),0 0 30px rgba(255,215,0,.2)}50%{box-shadow:0 0 30px rgba(255,107,0,.9),0 0 60px rgba(255,215,0,.4)}}
+.fw{position:absolute;pointer-events:none;font-size:16px;animation:fwAnim linear forwards;}
+@keyframes fwAnim{0%{opacity:1;transform:translateY(0) scale(1)}100%{opacity:0;transform:translateY(-200px) scale(0)}}
+
+/* ── APP ── */
+#app{display:none;position:fixed;inset:0;z-index:1;flex-direction:column;height:100%;overflow:hidden;}
+
+/* ── HEADER ── */
+#hdr{flex-shrink:0;position:relative;display:flex;align-items:center;gap:4px;padding:5px 7px;
+  background:rgba(5,5,16,.96);border-bottom:1px solid rgba(255,107,0,.1);}
+#hdr::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,#FF6B00,#FFD700,#00A86B,transparent);
+  animation:hLine 3s ease-in-out infinite;}
+@keyframes hLine{0%,100%{opacity:.4;filter:blur(0px)}50%{opacity:1;filter:blur(.5px)}}
+
+.ham{flex-shrink:0;width:36px;height:36px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  background:rgba(255,107,0,.1);border:1.5px solid rgba(255,107,0,.4);border-radius:8px;cursor:pointer;}
+.ham span{display:block;width:15px;height:2px;background:#FF6B00;border-radius:1px;}
+
+.hdr-mid{flex:1;display:flex;align-items:center;gap:4px;min-width:0;}
+.hdr-flag{font-size:19px;flex-shrink:0;}
+.hdr-name{font-family:'Nunito',sans-serif;font-size:10px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  background:linear-gradient(90deg,#FF6B00,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hdr-sub{font-size:8px;color:rgba(255,248,240,.3);display:flex;align-items:center;gap:2px;}
+.dot{width:5px;height:5px;background:#00A86B;border-radius:50%;animation:blink 1.4s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* 3 ROBOTS IN HEADER */
+.ai-bots{display:flex;gap:2px;}
+.ai-bot{display:flex;flex-direction:column;align-items:center;cursor:pointer;padding:1px;}
+.ai-bot canvas{width:22px;height:22px;}
+.ai-bot em{font-size:7px;font-style:normal;color:rgba(255,215,0,.55);}
+.rb-btn{background:rgba(255,107,0,.12);border:1.5px solid rgba(255,107,0,.3);color:#FF6B00;
+  width:28px;height:28px;border-radius:7px;font-size:13px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.rb-btn:active{background:rgba(255,107,0,.25);}
+.rb-btn.active{background:rgba(255,107,0,.25);border-color:#FF6B00;animation:rbPulse 1s infinite;}
+@keyframes rbPulse{0%,100%{box-shadow:0 0 5px rgba(255,107,0,.4)}50%{box-shadow:0 0 12px rgba(255,107,0,.8)}}
+
+.hbtns{display:flex;gap:2px;}
+.hbtn{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,107,0,.18);color:rgba(255,248,240,.5);
+  padding:4px 5px;border-radius:6px;font-size:10px;cursor:pointer;white-space:nowrap;font-weight:600;}
+#loginBtn{background:linear-gradient(135deg,#CC0000,#FF4400);border-color:#FFD700;color:#fff;font-weight:800;font-size:9px;}
+
+/* ── TIMER ── */
+#timerRow{flex-shrink:0;display:flex;align-items:center;gap:5px;padding:2px 8px;
+  background:rgba(0,0,0,.25);border-bottom:1px solid rgba(255,107,0,.05);}
+#timerTxt{font-size:9px;color:rgba(255,248,240,.28);white-space:nowrap;}
+.t-track{flex:1;height:2px;background:rgba(255,255,255,.04);border-radius:1px;overflow:hidden;}
+#timerFill{height:100%;width:100%;background:linear-gradient(90deg,#FF6B00,#FFD700);}
+
+/* ── MODE BAR ── */
+#modeBar{flex-shrink:0;display:flex;gap:3px;padding:3px 7px;overflow-x:auto;border-bottom:1px solid rgba(255,107,0,.05);}
+#modeBar::-webkit-scrollbar{display:none;}
+.mchip{padding:3px 9px;border-radius:12px;font-size:10px;font-weight:700;cursor:pointer;white-space:nowrap;
+  border:1.5px solid rgba(255,107,0,.12);background:rgba(255,255,255,.03);color:rgba(255,248,240,.38);}
+.mchip.on{background:rgba(255,107,0,.18);border-color:#FF6B00;color:#FF6B00;box-shadow:0 0 7px rgba(255,107,0,.25);}
+
+/* ── TABS ── */
+#tabsRow{flex-shrink:0;display:flex;gap:3px;padding:3px 7px;border-bottom:1px solid rgba(255,107,0,.05);}
+.tbtn{flex:1;padding:5px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;
+  border:none;background:rgba(255,255,255,.04);color:rgba(255,248,240,.32);font-family:'Baloo 2',sans-serif;}
+.tbtn.on{background:linear-gradient(135deg,#FF6B00,#CC3300);color:#fff;box-shadow:0 0 10px rgba(255,107,0,.35);}
+
+/* ── CONTENT ── */
+#content{flex:1;overflow:hidden;display:flex;flex-direction:column;min-height:0;}
+
+/* ── CHAT TAB ── */
+#chatTab{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;}
+#msgs{flex:1;overflow-y:auto;padding:9px;display:flex;flex-direction:column;gap:7px;min-height:0;}
+#msgs::-webkit-scrollbar{width:2px;}
+#msgs::-webkit-scrollbar-thumb{background:linear-gradient(#FF6B00,#00A86B);border-radius:1px;}
+
+.welcome{background:rgba(255,107,0,.06);border:1.5px solid rgba(255,107,0,.2);border-radius:14px;padding:13px;text-align:center;box-shadow:0 0 30px rgba(255,107,0,.08),inset 0 0 30px rgba(255,215,0,.02);}
+.w-emoji{font-size:26px;margin-bottom:3px;}
+.w-title{font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#FFD700;margin-bottom:3px;}
+.w-sub{font-size:11px;color:rgba(255,248,240,.48);line-height:1.7;}
+.w-chips{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin-top:7px;}
+.wc{background:rgba(255,107,0,.07);border:1.5px solid rgba(255,107,0,.18);color:rgba(255,248,240,.62);
+  padding:4px 9px;border-radius:11px;font-size:10px;cursor:pointer;font-weight:700;}
+
+.msg{display:flex;gap:5px;align-items:flex-start;}
+.msg.u{flex-direction:row-reverse;}
+.av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:2px;}
+.msg.ai .av{background:linear-gradient(135deg,#FF6B00,#CC3300);}
+.msg.u .av{background:rgba(255,255,255,.07);}
+.bbl{max-width:87%;padding:8px 11px;border-radius:14px;font-size:13px;line-height:1.75;font-weight:500;}
+.msg.ai .bbl{background:rgba(255,107,0,.07);border:1.5px solid rgba(255,107,0,.16);border-top-left-radius:3px;}
+.msg.u .bbl{background:rgba(0,168,107,.08);border:1.5px solid rgba(0,168,107,.18);border-top-right-radius:3px;}
+.dots{display:flex;gap:4px;padding:2px 0;}
+.dots span{width:6px;height:6px;background:#FF6B00;border-radius:50%;animation:bnc 1.2s infinite;}
+.dots span:nth-child(2){animation-delay:.2s}.dots span:nth-child(3){animation-delay:.4s}
+@keyframes bnc{0%,60%,100%{transform:translateY(0);opacity:.3}30%{transform:translateY(-6px);opacity:1}}
+.acts{display:flex;gap:3px;margin-top:5px;flex-wrap:wrap;}
+.act{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:rgba(255,248,240,.38);
+  padding:3px 7px;border-radius:11px;font-size:10px;cursor:pointer;font-weight:700;}
+.act.on{background:rgba(255,107,0,.14);border-color:#FF6B00;color:#FF6B00;}
+
+/* ── INPUT AREA ── */
+#inputArea{flex-shrink:0;border-top:2px solid rgba(255,107,0,.14);background:#050510;padding:5px 8px 10px;}
+.exp-row{display:flex;gap:3px;margin-bottom:4px;}
+.ebtn{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,107,0,.1);color:rgba(255,248,240,.33);
+  padding:4px 2px;border-radius:6px;font-size:9px;cursor:pointer;font-weight:700;font-family:'Baloo 2',sans-serif;}
+.inp-row{display:flex;gap:4px;align-items:flex-end;}
+.plus-btn{flex-shrink:0;width:38px;height:38px;background:rgba(255,107,0,.1);border:1.5px solid rgba(255,107,0,.25);
+  border-radius:50%;color:#FF6B00;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+#inp{flex:1;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,107,0,.18);border-radius:20px;
+  padding:9px 13px;color:#FFF8F0;font-family:'Baloo 2',sans-serif;font-size:13px;outline:none;resize:none;min-height:40px;max-height:88px;line-height:1.5;}
+#inp::placeholder{color:rgba(255,248,240,.22);}
+#inp:focus{border-color:#FF6B00;box-shadow:0 0 0 2px rgba(255,107,0,.1);}
+.mic-btn2{flex-shrink:0;width:38px;height:38px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,107,0,.18);
+  border-radius:50%;color:rgba(255,248,240,.45);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+/* BLACK VOICE BUTTON like ChatGPT */
+#voiceBtn{flex-shrink:0;width:40px;height:40px;background:#111122;border:2px solid rgba(255,107,0,.3);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 0 10px rgba(255,107,0,.18);}
+#voiceBtn svg{width:19px;height:19px;}
+#voiceBtn.listening{background:linear-gradient(135deg,#CC0000,#880000);animation:vbP 1s infinite;}
+@keyframes vbP{0%,100%{box-shadow:0 0 10px rgba(255,0,0,.4)}50%{box-shadow:0 0 25px rgba(255,0,0,.8)}}
+#sendBtn{flex-shrink:0;width:42px;height:42px;background:linear-gradient(135deg,#FF6B00,#CC3300);
+  border:none;border-radius:50%;color:#fff;font-size:18px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 15px rgba(255,107,0,.6);animation:sndGlow 1.5s ease-in-out infinite;}
+@keyframes sndGlow{0%,100%{box-shadow:0 0 10px rgba(255,107,0,.5)}50%{box-shadow:0 0 25px rgba(255,107,0,.9),0 0 40px rgba(255,215,0,.3)}}
+#sendBtn:disabled{opacity:.4;cursor:not-allowed;animation:none;}
+
+/* FILE PREVIEW */
+#filePreview{display:none;padding:3px 0 4px;align-items:center;gap:5px;font-size:10px;color:rgba(255,248,240,.38);}
+#fThumb{width:28px;height:28px;border-radius:4px;object-fit:cover;}
+.rm-f{cursor:pointer;color:#FF3333;font-size:13px;}
+
+/* ── IMAGE TAB ── */
+#imageTab{display:none;flex:1;overflow-y:auto;padding:9px;}
+.img-timer-row{display:flex;align-items:center;gap:5px;padding:5px 9px;margin-bottom:7px;
+  background:rgba(255,107,0,.05);border:1px solid rgba(255,107,0,.1);border-radius:8px;}
+#imgTimerTxt{font-size:9px;color:rgba(255,248,240,.38);flex:1;}
+.i-track{flex:2;height:2px;background:rgba(255,255,255,.04);border-radius:1px;overflow:hidden;}
+#imgTimerFill{height:100%;background:linear-gradient(90deg,#FF6B00,#FFD700);}
+.ipbox{background:rgba(255,255,255,.03);border:1.5px solid rgba(255,107,0,.1);border-radius:11px;padding:10px;margin-bottom:7px;}
+.ilabel{font-size:10px;color:rgba(255,248,240,.32);margin-bottom:5px;font-weight:700;}
+#imgPrompt{width:100%;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,107,0,.1);border-radius:8px;
+  padding:8px 10px;color:#FFF8F0;font-family:'Baloo 2',sans-serif;font-size:12px;outline:none;resize:none;min-height:55px;line-height:1.5;}
+#imgPrompt::placeholder{color:rgba(255,248,240,.16);}
+#imgPrompt:focus{border-color:#FF6B00;}
+.stys{display:flex;gap:3px;flex-wrap:wrap;margin:5px 0;}
+.sty{padding:3px 8px;border-radius:11px;font-size:10px;cursor:pointer;font-weight:700;
+  border:1.5px solid rgba(255,107,0,.1);background:rgba(255,255,255,.03);color:rgba(255,248,240,.35);}
+.sty.on{background:rgba(255,107,0,.16);border-color:#FF6B00;color:#FF6B00;}
+#genBtn{width:100%;background:linear-gradient(135deg,#FF6B00,#CC3300);border:none;border-radius:9px;
+  padding:11px;color:#fff;font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;cursor:pointer;box-shadow:0 0 12px rgba(255,107,0,.28);}
+#genBtn:disabled{opacity:.4;cursor:not-allowed;}
+#imgResult{margin-top:9px;text-align:center;display:none;}
+#imgResult img{width:100%;border-radius:10px;border:2px solid rgba(255,107,0,.28);}
+.iacts{display:flex;gap:5px;margin-top:5px;justify-content:center;}
+.iact{background:rgba(255,255,255,.05);border:1px solid rgba(255,107,0,.1);color:rgba(255,248,240,.48);
+  padding:5px 11px;border-radius:7px;font-size:11px;cursor:pointer;font-weight:700;}
+
+/* ── FEATURES TAB ── */
+#featTab{display:none;flex:1;overflow-y:auto;padding:9px;}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+.fcard{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,107,0,.1);border-radius:11px;
+  padding:11px;text-align:center;cursor:pointer;}
+.fcard:active{background:rgba(255,107,0,.08);}
+.fcard big{font-size:22px;display:block;margin-bottom:4px;}
+.fcard b{font-size:9px;color:#FF6B00;display:block;margin-bottom:2px;font-weight:900;letter-spacing:.4px;}
+.fcard small{font-size:9px;color:rgba(255,248,240,.35);line-height:1.5;}
+.soon{display:inline-block;background:rgba(255,215,0,.12);border:1px solid rgba(255,215,0,.25);
+  color:#FFD700;font-size:8px;padding:1px 5px;border-radius:4px;margin-top:3px;font-weight:700;}
+
+/* ── VOICE SCREEN ── */
+#voiceScreen{display:none;position:fixed;inset:0;z-index:200;
+  background:linear-gradient(160deg,#050510,#0A0820);
+  flex-direction:column;align-items:center;justify-content:center;gap:11px;overflow:hidden;}
+.v-timer{display:flex;align-items:center;gap:7px;padding:4px 13px;
+  background:rgba(255,107,0,.07);border:1px solid rgba(255,107,0,.16);border-radius:15px;}
+#vTimerTxt{font-size:10px;color:rgba(255,248,240,.42);}
+.vt-track{width:65px;height:2px;background:rgba(255,255,255,.05);border-radius:1px;overflow:hidden;}
+#vTimerFill{height:100%;background:linear-gradient(90deg,#FF6B00,#FFD700);}
+#robotCanvas{width:155px;height:155px;filter:drop-shadow(0 0 18px rgba(255,107,0,.45));}
+.v-status{font-size:12px;color:rgba(255,248,240,.42);text-align:center;}
+.v-trans{width:86%;max-width:285px;min-height:33px;padding:8px;
+  background:rgba(255,107,0,.05);border:1.5px solid rgba(255,107,0,.12);border-radius:9px;
+  font-size:11px;color:rgba(255,248,240,.52);text-align:center;line-height:1.6;}
+.v-btns{display:flex;gap:10px;}
+#micBtn{width:56px;height:56px;border-radius:50%;border:none;
+  background:linear-gradient(135deg,#FF6B00,#CC3300);color:#fff;font-size:22px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(255,107,0,.4);}
+#micBtn.rec{background:linear-gradient(135deg,#CC0000,#880000);animation:mP 1s infinite;}
+@keyframes mP{0%,100%{box-shadow:0 0 10px rgba(255,0,0,.4)}50%{box-shadow:0 0 28px rgba(255,0,0,.8)}}
+.v-close{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,107,0,.18);
+  color:rgba(255,248,240,.38);padding:8px 17px;border-radius:9px;font-family:'Baloo 2',sans-serif;font-size:12px;cursor:pointer;}
+
+/* ── OBSERVER AI SCREEN ── */
+#obsScreen{display:none;position:fixed;inset:0;z-index:200;
+  background:linear-gradient(160deg,#050510,#080520);
+  flex-direction:column;align-items:center;justify-content:center;gap:9px;overflow:hidden;}
+.obs-hdr{font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;
+  background:linear-gradient(90deg,#00A86B,#00FFB3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+#obsCanvas{width:140px;height:140px;filter:drop-shadow(0 0 16px rgba(0,168,107,.5));}
+.obs-greet{font-size:13px;color:#00FFB3;font-weight:700;text-align:center;}
+.obs-msgs{width:90%;max-width:310px;height:190px;overflow-y:auto;padding:8px;
+  background:rgba(0,168,107,.05);border:1.5px solid rgba(0,168,107,.14);border-radius:11px;
+  font-size:12px;line-height:1.7;color:rgba(255,248,240,.68);}
+.obs-msgs::-webkit-scrollbar{width:2px;}
+.obs-msgs::-webkit-scrollbar-thumb{background:#00A86B;border-radius:1px;}
+.obs-msg-ai{color:#00FFB3;margin-bottom:4px;}
+.obs-msg-u{color:rgba(255,248,240,.7);margin-bottom:4px;text-align:right;}
+.obs-inp-row{display:flex;gap:5px;width:90%;max-width:310px;}
+#obsInp{flex:1;background:rgba(255,255,255,.06);border:1.5px solid rgba(0,168,107,.2);border-radius:18px;
+  padding:8px 12px;color:#FFF8F0;font-family:'Baloo 2',sans-serif;font-size:12px;outline:none;}
+#obsInp:focus{border-color:#00A86B;}
+#obsSend{width:36px;height:36px;background:linear-gradient(135deg,#00A86B,#005533);border:none;
+  border-radius:50%;color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.obs-close{background:rgba(255,255,255,.05);border:1.5px solid rgba(0,168,107,.18);
+  color:rgba(255,248,240,.38);padding:7px 16px;border-radius:9px;font-family:'Baloo 2',sans-serif;font-size:12px;cursor:pointer;}
+
+/* ── PANELS ── */
+.panel{display:none;position:fixed;inset:0;z-index:300;background:rgba(5,5,16,.99);flex-direction:column;}
+.ph{padding:10px 12px;border-bottom:1.5px solid rgba(255,107,0,.14);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.ph h3{font-family:'Nunito',sans-serif;font-size:13px;color:#FF6B00;font-weight:900;}
+.ph-x{background:rgba(255,255,255,.05);border:1px solid rgba(255,107,0,.16);color:#FFF8F0;padding:4px 9px;border-radius:6px;font-size:11px;cursor:pointer;font-weight:700;}
+.pb{flex:1;overflow-y:auto;padding:10px 12px;}
+.p-search{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,107,0,.14);border-radius:9px;padding:7px 11px;margin-bottom:9px;}
+.p-search input{flex:1;background:transparent;border:none;outline:none;color:#FFF8F0;font-family:'Baloo 2',sans-serif;font-size:12px;}
+.p-search input::placeholder{color:rgba(255,248,240,.22);}
+.ncbtn{width:100%;background:linear-gradient(135deg,#FF6B00,#CC3300);border:none;border-radius:9px;
+  padding:10px;color:#fff;font-family:'Baloo 2',sans-serif;font-size:13px;font-weight:800;cursor:pointer;margin-bottom:7px;
+  box-shadow:0 0 10px rgba(255,107,0,.28);}
+.si{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,107,0,.1);border-radius:9px;
+  padding:8px 11px;margin-bottom:5px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.si.cur{border-color:rgba(255,107,0,.42);background:rgba(255,107,0,.06);}
+.si-t{font-size:12px;font-weight:700;}
+.si-d{font-size:9px;color:rgba(255,248,240,.28);margin-top:2px;}
+.sdel{background:rgba(255,50,50,.1);border:1px solid rgba(255,50,50,.16);color:#ff9999;padding:2px 6px;border-radius:5px;font-size:9px;cursor:pointer;}
+.p-user{display:flex;align-items:center;gap:8px;padding:10px 12px;border-top:1px solid rgba(255,107,0,.1);flex-shrink:0;}
+.p-user-av{width:28px;height:28px;border-radius:50%;background:rgba(255,107,0,.18);display:flex;align-items:center;justify-content:center;font-size:13px;}
+.p-user-nm{font-size:12px;font-weight:700;color:#FFD700;}
+.fi{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,215,0,.1);border-radius:9px;padding:9px 11px;margin-bottom:5px;font-size:11px;line-height:1.6;}
+.fi-d{font-size:9px;color:rgba(255,248,240,.28);margin-top:3px;}
+
+/* ── MODALS ── */
+.modal{display:none;position:fixed;inset:0;z-index:500;background:rgba(5,5,16,.97);align-items:center;justify-content:center;padding:18px;}
+.mcard{background:#080818;border:1.5px solid rgba(255,107,0,.2);border-radius:16px;padding:21px 17px;max-width:295px;width:100%;text-align:center;}
+.mcard h3{font-family:'Nunito',sans-serif;font-size:13px;color:#FF6B00;margin-bottom:5px;font-weight:900;}
+.mcard p{font-size:11px;color:rgba(255,248,240,.36);margin-bottom:12px;line-height:1.6;}
+.mbtns{display:flex;gap:6px;}
+.mcnl{flex:1;background:rgba(255,255,255,.04);border:1px solid rgba(255,107,0,.16);color:#FFF8F0;padding:9px;border-radius:8px;font-size:12px;cursor:pointer;font-weight:700;}
+.mok{flex:1;background:linear-gradient(135deg,#CC0000,#880000);border:none;color:#fff;padding:9px;border-radius:8px;font-size:12px;font-weight:800;cursor:pointer;}
+
+/* MALIK */
+#malikModal{display:none;position:fixed;inset:0;z-index:600;background:rgba(5,5,16,.98);align-items:center;justify-content:center;padding:18px;}
+.mkcard{background:linear-gradient(135deg,rgba(255,107,0,.07),rgba(255,215,0,.03));border:2px solid #FFD700;border-radius:17px;padding:23px 17px;max-width:295px;width:100%;text-align:center;}
+.mkcrown{font-size:42px;animation:cb 1s ease-in-out infinite;}
+@keyframes cb{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-8px) rotate(5deg)}}
+.mkt{font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;background:linear-gradient(135deg,#FF6B00,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px;}
+.mks{font-size:11px;color:rgba(255,248,240,.35);margin-bottom:12px;}
+#mkErr{color:#ff9999;font-size:11px;margin-bottom:7px;display:none;}
+#mkInp{width:100%;background:rgba(255,255,255,.05);border:2px solid rgba(255,215,0,.25);border-radius:9px;padding:10px;color:#FFF8F0;font-size:17px;text-align:center;letter-spacing:6px;outline:none;margin-bottom:9px;}
+#mkInp:focus{border-color:#FFD700;}
+.mkbtn{width:100%;background:linear-gradient(135deg,#FFD700,#FF6B00);border:none;border-radius:9px;padding:11px;color:#fff;font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;cursor:pointer;margin-bottom:6px;}
+.mkx{width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,107,0,.1);color:rgba(255,248,240,.28);padding:9px;border-radius:9px;font-size:11px;cursor:pointer;}
+#mkBadge{display:none;position:fixed;top:40px;right:7px;z-index:50;background:linear-gradient(135deg,#FFD700,#FF6B00);color:#fff;font-size:8px;font-weight:900;padding:2px 7px;border-radius:7px;}
+
+/* DATA MODAL */
+#dataModal{display:none;position:fixed;inset:0;z-index:600;background:rgba(5,5,16,.98);align-items:center;justify-content:center;padding:14px;}
+.dcard{background:#080818;border:2px solid rgba(0,168,107,.28);border-radius:16px;padding:15px;max-width:330px;width:100%;max-height:78vh;overflow-y:auto;}
+.dcard h3{font-family:'Nunito',sans-serif;font-size:13px;color:#00A86B;margin-bottom:9px;font-weight:900;text-align:center;}
+.drow{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:11px;}
+.dlabel{color:rgba(255,248,240,.35);}
+.dval{color:#FFD700;font-weight:700;}
+.dclose{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,107,0,.1);color:rgba(255,248,240,.35);padding:9px;border-radius:8px;font-size:12px;cursor:pointer;margin-top:9px;}
+#dPW p{font-size:11px;color:rgba(255,248,240,.35);margin-bottom:7px;text-align:center;}
+#dPE{color:#ff9999;font-size:10px;margin-bottom:5px;display:none;text-align:center;}
+#dPI{width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(0,168,107,.22);border-radius:8px;padding:9px;color:#FFF8F0;font-size:15px;text-align:center;letter-spacing:5px;outline:none;margin-bottom:7px;}
+.dunlock{width:100%;background:linear-gradient(135deg,#00A86B,#005533);border:none;border-radius:8px;padding:10px;color:#fff;font-family:'Nunito',sans-serif;font-size:12px;font-weight:900;cursor:pointer;margin-bottom:6px;}
+
+/* SIGNUP */
+#signupScreen{display:none;position:fixed;inset:0;z-index:700;background:rgba(5,5,16,.97);align-items:center;justify-content:center;padding:16px;}
+.scard{background:#080818;border:1.5px solid rgba(255,107,0,.2);border-radius:17px;padding:22px 17px;width:100%;max-width:320px;text-align:center;}
+.scard h2{font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;background:linear-gradient(135deg,#FF6B00,#FFD700,#00A86B);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:3px;}
+.scard p{font-size:11px;color:rgba(255,248,240,.32);margin-bottom:11px;}
+.stabs{display:flex;gap:3px;background:rgba(255,255,255,.04);border-radius:8px;padding:2px;margin-bottom:11px;}
+.stab{flex:1;padding:6px;border-radius:6px;font-family:'Baloo 2',sans-serif;font-size:10px;font-weight:700;cursor:pointer;border:none;background:transparent;color:rgba(255,248,240,.28);}
+.stab.on{background:linear-gradient(135deg,#FF6B00,#CC3300);color:#fff;}
+.sinp{width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(255,107,0,.14);border-radius:9px;padding:9px 11px;color:#FFF8F0;font-family:'Baloo 2',sans-serif;font-size:12px;outline:none;margin-bottom:7px;}
+.sinp:focus{border-color:#FF6B00;}
+.sinp::placeholder{color:rgba(255,248,240,.16);}
+.sbtn{width:100%;background:linear-gradient(135deg,#FF6B00,#CC3300);border:none;border-radius:9px;padding:11px;color:#fff;font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;cursor:pointer;margin-bottom:6px;}
+.sskip{width:100%;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,107,0,.1);color:rgba(255,248,240,.28);padding:9px;border-radius:9px;font-size:12px;cursor:pointer;}
+#sAlert{display:none;padding:6px;margin-bottom:7px;background:rgba(255,50,50,.07);border:1px solid rgba(255,50,50,.16);border-radius:7px;font-size:11px;color:#ff9999;}
+
+/* PLUS MENU */
+#plusMenu{display:none;position:fixed;bottom:62px;left:7px;z-index:100;background:#080818;
+  border:1.5px solid rgba(255,107,0,.18);border-radius:13px;padding:7px;min-width:175px;
+  box-shadow:0 0 18px rgba(255,107,0,.12);}
+.pm{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:7px;cursor:pointer;font-size:12px;color:rgba(255,248,240,.62);font-weight:600;}
+.pm:active{background:rgba(255,107,0,.09);}
+.pm-sep{height:1px;background:rgba(255,107,0,.09);margin:3px 0;}
+.pm-s{font-size:8px;color:rgba(255,215,0,.45);margin-left:auto;}
+
+/* CREATOR CARD */
+.cc{background:#000;border:2px solid rgba(255,107,0,.2);border-radius:14px;padding:14px;margin-top:7px;text-align:center;}
+.cc-phs{display:flex;justify-content:center;margin-bottom:10px;}
+.cc-ph{width:130px;height:160px;border-radius:12px;overflow:hidden;flex-shrink:0;
+  border:3px solid #FF6B00;
+  box-shadow:0 0 0 2px #000,0 0 0 4px #FFD700,0 0 25px rgba(255,107,0,.5);
+  background:#000;}
+.cc-ph img{width:100%;height:100%;object-fit:cover;object-position:center 10%;}
+.cc-nm{font-family:'Nunito',sans-serif;font-size:11px;color:#FFD700;font-weight:900;margin-bottom:3px;letter-spacing:.5px;}
+.cc-msg{margin-top:7px;padding:8px;background:rgba(255,107,0,.07);border:1px solid rgba(255,107,0,.15);border-radius:8px;font-size:10px;color:rgba(255,248,240,.65);line-height:1.8;text-align:left;}
+
+/* LIGHT MODE */
+body.light{background:#EFEFEF;color:#111;}
+body.light #hdr,body.light #inputArea{background:#EFEFEF;}
+body.light #msgs{background:#EFEFEF;}
+body.light #inp,body.light .bbl{color:#111;}
+body.light .mcard,body.light .mkcard,body.light .dcard,body.light .scard,body.light #plusMenu,body.light .panel{background:#E0E0E0;}
+
+img{-webkit-touch-callout:none!important;-webkit-user-select:none!important;user-select:none!important;}
+</style>
+</head>
+<body>
+<div class="tricolor"></div>
+<div id="luxBg"></div>
+<div id="luxGrid"></div>
+
+<!-- SPLASH -->
+<div id="splash">
+  <div id="spText"></div>
+  <div class="sp-robots">
+    <div class="sp-rb"><canvas id="sR1" width="60" height="60"></canvas><span>🛡️ Security Guard</span></div>
+    <div class="sp-rb"><canvas id="sR2" width="60" height="60"></canvas><span>🧠 Mahan Roxan Sigma</span></div>
+    <div class="sp-rb"><canvas id="sR3" width="60" height="60"></canvas><span>👁️ Observer AI</span></div>
+  </div>
+  <div class="bar-wrap"><div class="bar-fill" id="spBar"></div></div>
+  <div class="sp-made">Made with ❤️ by Shivam Prajapati &amp; Mahan Roxan Ji 🙏</div>
+  <button id="spBtn" onclick="startApp()">🚀 शुरू करो!</button>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div id="hdr">
+    <div class="ham" onclick="openPanel('chatsPanel')"><span></span><span></span><span></span></div>
+    <div class="hdr-mid">
+      <span class="hdr-flag">🇮🇳</span>
+      <div><div class="hdr-name">MY INDIA KNOWLEDGE AI</div><div class="hdr-sub"><span class="dot"></span> Online</div></div>
+    </div>
+    <div class="ai-bots">
+      <div class="ai-bot" onclick="aiInfo('s')" title="Security Guard"><canvas id="hR1" width="22" height="22"></canvas><em>🛡️</em></div>
+      <div class="ai-bot" onclick="aiInfo('m')" title="Mahan Roxan Sigma"><canvas id="hR2" width="22" height="22"></canvas><em>🧠</em></div>
+      <div class="ai-bot" onclick="openObserver()" title="Observer AI"><canvas id="hR3" width="22" height="22"></canvas><em>👁️</em></div>
+
+    </div>
+    <div class="hbtns">
+      <button class="hbtn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+      <button class="hbtn" onclick="openPanel('favsPanel')">⭐</button>
+      <button class="hbtn" id="loginBtn" onclick="document.getElementById('signupScreen').style.display='flex'">🔑 Login</button>
+    </div>
+  </div>
+
+  <div id="timerRow"><span id="timerTxt">⏱️ 10:00:00 बाकी</span><div class="t-track"><div id="timerFill"></div></div></div>
+
+  <div id="modeBar">
+    <button class="mchip on" onclick="setMode('normal',this)">💬 Normal</button>
+    <button class="mchip" onclick="setMode('study',this)">📚 पढ़ाई</button>
+    <button class="mchip" onclick="setMode('business',this)">💼 Business</button>
+    <button class="mchip" onclick="setMode('code',this)">💻 Code</button>
+    <button class="mchip" onclick="setMode('creative',this)">✨ Creative</button>
+    <button class="mchip" onclick="setMode('motivate',this)">🔥 Motivation</button>
+  </div>
+
+  <div id="tabsRow">
+    <button class="tbtn on" id="tC" onclick="showTab('chat',this)">💬 Chat</button>
+    <button class="tbtn" id="tF" onclick="showTab('feat',this)">✨ Features</button>
+    <button class="tbtn" id="tI" onclick="showTab('image',this)">🎨 Image</button>
+  </div>
+
+  <div id="content">
+    <!-- CHAT -->
+    <div id="chatTab">
+      <div id="msgs"></div>
+      <div id="inputArea">
+        <div class="exp-row">
+          <button class="ebtn" onclick="exportChat('txt')">📄 Save</button>
+          <button class="ebtn" onclick="exportChat('copy')">📋 Copy</button>
+          <button class="ebtn" onclick="confirmClear()">🗑️ Clear</button>
+          <button class="ebtn" onclick="newChat()">✏️ New</button>
+          <button class="ebtn" onclick="showDataModal()">🔐 Data</button>
+        </div>
+        <div id="filePreview">
+          <img id="fThumb" src="" alt=""><span id="fName"></span>
+          <span class="rm-f" onclick="removeFile()">✕</span>
+        </div>
+        <div class="inp-row">
+          <button class="plus-btn" onclick="togglePlusMenu()">+</button>
+          <textarea id="inp" placeholder="My India Knowledge AI से पूछो..." onkeydown="onKey(event)" oninput="autoResize(this)" rows="1"></textarea>
+          <button id="sendBtn" onclick="send()" title="भेजो">➤</button>
+          <button class="mic-btn2" onclick="startVoiceInput()" title="🎤 टैप करो — बोलो — Text आएगा">🎤</button>
+          <button id="voiceBtn" onclick="openVoice()" title="🤖 Robot से सीधे बात करो">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+              <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURES -->
+    <div id="featTab">
+      <div style="background:rgba(255,107,0,.05);border:1.5px solid rgba(255,107,0,.15);border-radius:11px;padding:11px;margin-bottom:9px;">
+        <div style="font-family:'Nunito',sans-serif;font-size:12px;font-weight:900;color:#FFD700;margin-bottom:7px;">📊 आज की Limits</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <div id="lChat" style="flex:1;background:rgba(255,107,0,.08);border:1px solid rgba(255,107,0,.2);border-radius:8px;padding:8px;text-align:center;min-width:80px;">
+            <div style="font-size:18px;">💬</div>
+            <div style="font-size:9px;color:#FF6B00;font-weight:700;margin-top:2px;">CHAT</div>
+            <div id="lChatTxt" style="font-size:10px;color:rgba(255,248,240,.55);margin-top:2px;">5:00:00</div>
+          </div>
+          <div id="lImg" style="flex:1;background:rgba(255,215,0,.06);border:1px solid rgba(255,215,0,.15);border-radius:8px;padding:8px;text-align:center;min-width:80px;">
+            <div style="font-size:18px;">🎨</div>
+            <div style="font-size:9px;color:#FFD700;font-weight:700;margin-top:2px;">IMAGE</div>
+            <div id="lImgTxt" style="font-size:10px;color:rgba(255,248,240,.55);margin-top:2px;">10 बाकी</div>
+          </div>
+          <div id="lVoice" style="flex:1;background:rgba(0,168,107,.06);border:1px solid rgba(0,168,107,.15);border-radius:8px;padding:8px;text-align:center;min-width:80px;">
+            <div style="font-size:18px;">🎤</div>
+            <div style="font-size:9px;color:#00A86B;font-weight:700;margin-top:2px;">VOICE</div>
+            <div id="lVoiceTxt" style="font-size:10px;color:rgba(255,248,240,.55);margin-top:2px;">2:00:00</div>
+          </div>
+        </div>
+      </div>
+      <div class="fgrid">
+        <div class="fcard" onclick="tryF('business idea दो')"><big>💼</big><b>BUSINESS</b><small>Ideas & strategies</small></div>
+        <div class="fcard" onclick="tryF('code लिखो')"><big>💻</big><b>CODE</b><small>Code & bugs fix</small></div>
+        <div class="fcard" onclick="tryF('motivate करो')"><big>🔥</big><b>MOTIVATION</b><small>Inspire करो</small></div>
+        <div class="fcard" onclick="tryF('कहानी लिखो')"><big>✍️</big><b>CREATIVE</b><small>Stories & poems</small></div>
+        <div class="fcard" onclick="tryF('पढ़ाई में मदद करो')"><big>📚</big><b>STUDY</b><small>Homework help</small></div>
+        <div class="fcard" onclick="openVoice()"><big>🎤</big><b>VOICE AI</b><small>बोलकर पूछो</small></div>
+        <div class="fcard" onclick="openObserver()"><big>👁️</big><b>OBSERVER AI</b><small>छोटे भाई से बात</small></div>
+        <div class="fcard" onclick="openBoardSystem()"><big>📚</big><b>BOARD BOOKS</b><small>UP & CBSE Books</small></div>
+        <div class="fcard" onclick="openAdminSystem()"><big>⚙️</big><b>ADMIN PANEL</b><small>Books add करो</small></div>
+        <div class="fcard" onclick="soon('Social Media')"><big>📱</big><b>SOCIAL MEDIA</b><small>Posts & content</small><div class="soon">जल्द आएगा</div></div>
+        <div class="fcard" onclick="soon('TikTok Mode')"><big>🎬</big><b>TIKTOK</b><small>Short videos</small><div class="soon">जल्द आएगा</div></div>
+        <div class="fcard" onclick="soon('Shopping Mode')"><big>🛒</big><b>SHOPPING</b><small>Product search</small><div class="soon">जल्द आएगा</div></div>
+      </div>
+    </div>
+
+    <!-- IMAGE -->
+    <div id="imageTab">
+      <div class="img-timer-row">
+        <span id="imgTimerTxt">🎨 20:00 बाकी</span>
+        <div class="i-track"><div id="imgTimerFill"></div></div>
+        <span id="imgCount" style="font-size:9px;color:rgba(255,248,240,.3);">10 बाकी</span>
+      </div>
+      <div class="ipbox">
+        <div class="ilabel">📝 क्या बनाना है?</div>
+        <textarea id="imgPrompt" placeholder="जैसे: भारतीय गाँव शाम का दृश्य..."></textarea>
+        <div class="stys">
+          <button class="sty on" onclick="setSty(this,'')">Normal</button>
+          <button class="sty" onclick="setSty(this,'digital art')">Art</button>
+          <button class="sty" onclick="setSty(this,'photorealistic')">Real</button>
+          <button class="sty" onclick="setSty(this,'anime style')">Anime</button>
+          <button class="sty" onclick="setSty(this,'3d render')">3D</button>
+        </div>
+        <button id="genBtn" onclick="generateImage()">🎨 Image बनाओ</button>
+      </div>
+      <div id="imgResult"><img id="genImg" src="" alt=""><div class="iacts"><button class="iact" onclick="dlImg()">⬇️ Save</button><button class="iact" onclick="shareImg()">📤 Share</button></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- VOICE SCREEN -->
+<div id="voiceScreen">
+  <div class="v-timer"><span id="vTimerTxt">🎤 2:00:00 बाकी</span><div class="vt-track"><div id="vTimerFill"></div></div></div>
+  <canvas id="robotCanvas" width="155" height="155"></canvas>
+  <div id="vGreet" style="font-size:13px;color:#FFD700;font-weight:700;text-align:center;padding:4px 20px;min-height:18px;line-height:1.5;"></div>
+  <div class="v-status" id="vStatus">माइक दबाओ और बोलो</div>
+  <div class="v-trans" id="vTrans">आपकी आवाज़ यहाँ दिखेगी...</div>
+  <div style="display:flex;gap:18px;align-items:flex-end;justify-content:center;margin-top:8px;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
+      <button id="soundBtn" onclick="toggleSound()" style="width:52px;height:52px;border-radius:50%;border:2px solid #FFD700;background:rgba(255,215,0,.15);color:#FFD700;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center;">🔊</button>
+      <span style="font-size:10px;color:rgba(255,248,240,.4);font-weight:700;">आवाज़</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
+      <button id="micBtn" onclick="toggleMic()" style="width:58px;height:58px;border-radius:50%;border:none;background:linear-gradient(135deg,#FF6B00,#CC3300);color:#fff;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 0 18px rgba(255,107,0,.5);">🎤</button>
+      <span style="font-size:10px;color:rgba(255,248,240,.4);font-weight:700;">माइक</span>
+    </div>
+  </div>
+  <button class="v-close" onclick="closeVoice()" style="margin-top:12px;">✕ बंद करो</button>
+</div>
+
+<!-- OBSERVER AI SCREEN -->
+<div id="obsScreen">
+  <div class="obs-hdr">👁️ Observer AI — छोटा भाई</div>
+  <canvas id="obsCanvas" width="140" height="140"></canvas>
+  <div class="obs-greet" id="obsGreet">हुजूर फरमाइए... 🙏</div>
+  <div class="obs-msgs" id="obsMsgs"></div>
+  <div class="obs-inp-row">
+    <input id="obsInp" placeholder="छोटे भाई से पूछो..." onkeydown="if(event.key==='Enter')sendObs()">
+    <button id="obsSend" onclick="sendObs()">➤</button>
+  </div>
+  <button class="obs-close" onclick="closeObserver()">✕ बंद करो</button>
+</div>
+
+<!-- CHATS PANEL -->
+<div id="chatsPanel" class="panel">
+  <div class="ph"><h3>💬 Chats</h3><button class="ph-x" onclick="closePanel('chatsPanel')">✕</button></div>
+  <div class="pb" style="display:flex;flex-direction:column;flex:1;overflow:hidden;">
+    <div class="p-search"><span>🔍</span><input placeholder="सर्च करें..." oninput="searchChats(this.value)"></div>
+    <button class="ncbtn" onclick="newChat();closePanel('chatsPanel')">✏️ नई Chat शुरू करो</button>
+    <div id="sessionsList" style="flex:1;overflow-y:auto;"></div>
+    <div class="p-user"><div class="p-user-av">👤</div><div class="p-user-nm" id="pUserNm">Guest</div></div>
+  </div>
+</div>
+
+<!-- FAVS PANEL -->
+<div id="favsPanel" class="panel">
+  <div class="ph"><h3>⭐ Favourites</h3><button class="ph-x" onclick="closePanel('favsPanel')">✕</button></div>
+  <div class="pb"><div id="favsList"></div></div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div id="secModal" class="modal">
+  <div class="mcard">
+    <h3 id="secTitle">⚠️ Confirm</h3><p id="secMsg">क्या sure हैं?</p>
+    <div class="mbtns">
+      <button class="mcnl" onclick="document.getElementById('secModal').style.display='none'">Cancel</button>
+      <button class="mok" id="secOK">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- MALIK MODAL -->
+<div id="malikModal">
+  <div class="mkcard">
+    <div class="mkcrown">👑</div>
+    <div class="mkt">MALIK MODE</div>
+    <div class="mks">Secret Password डालो मालिक</div>
+    <div id="mkErr"></div>
+    <input id="mkInp" type="password" placeholder="••••••••" maxlength="12">
+    <button class="mkbtn" onclick="verifyMalik()">🔓 Unlock करो</button>
+    <button class="mkx" onclick="document.getElementById('malikModal').style.display='none';document.getElementById('mkInp').value=''">Cancel</button>
+  </div>
+</div>
+<div id="mkBadge">👑 MALIK MODE</div>
+
+<!-- DATA MODAL -->
+<div id="dataModal">
+  <div class="dcard">
+    <h3>🔐 AI Data File</h3>
+    <div id="dPW">
+      <p>Password डालो (केवल मालिक के लिए)</p>
+      <div id="dPE"></div>
+      <input id="dPI" type="password" placeholder="••••••••" maxlength="12">
+      <button class="dunlock" onclick="unlockData()">🔓 Open करो</button>
+      <button class="dclose" onclick="document.getElementById('dataModal').style.display='none'">Cancel</button>
+    </div>
+    <div id="dContent" style="display:none;"><div id="dRows"></div><button class="dclose" onclick="document.getElementById('dataModal').style.display='none'">✕ बंद करो</button></div>
+  </div>
+</div>
+
+<!-- SIGNUP -->
+<div id="signupScreen">
+  <div class="scard">
+    <h2>🇮🇳 My India Knowledge AI</h2>
+    <p>Login करो या API Key डालो</p>
+    <div class="stabs">
+      <button class="stab on" onclick="sSTab('e',this)">📧 Signup</button>
+      <button class="stab" onclick="sSTab('l',this)">🔑 Login</button>
+      
+    </div>
+    <div id="sAlert"></div>
+    <div id="s-e">
+      <input class="sinp" id="sName" placeholder="आपका नाम" type="text">
+      <input class="sinp" id="sEmail" placeholder="Email" type="email">
+      <input class="sinp" id="sPass" placeholder="Password (6+)" type="password">
+      <button class="sbtn" onclick="doSignup()">✅ Sign Up</button>
+    </div>
+    <div id="s-l" style="display:none;">
+      <input class="sinp" id="sLE" placeholder="Email" type="email">
+      <input class="sinp" id="sLP" placeholder="Password" type="password">
+      <button class="sbtn" onclick="doLogin()">🔑 Login</button>
+    </div>
+    <div id="s-k" style="display:none;">
+      <p style="font-size:10px;color:rgba(255,248,240,.28);margin-bottom:7px;">OpenRouter API Key (sk-or-...)</p>
+      <input class="sinp" id="sKey" placeholder="sk-or-..." type="password">
+      <button class="sbtn" onclick="saveKey()">💾 Save करो</button>
+    </div>
+    <button class="sskip" onclick="document.getElementById('signupScreen').style.display='none';skipLogin();">⏭️ बाद में</button>
+  </div>
+</div>
+
+<!-- PLUS MENU -->
+<div id="plusMenu">
+  <div class="pm" onclick="pickFile('image/*')">🖼️ Photo भेजो</div>
+  <div class="pm" onclick="pickFile('.pdf')">📄 PDF भेजो</div>
+  <div class="pm" onclick="pickFile('*')">📁 कोई भी File</div>
+  <div class="pm-sep"></div>
+  <div class="pm" onclick="soon('Social Media Mode')">📱 Social Media<span class="pm-s">जल्द</span></div>
+  <div class="pm" onclick="soon('TikTok Mode')">🎬 TikTok Mode<span class="pm-s">जल्द</span></div>
+  <div class="pm" onclick="soon('Shopping Mode')">🛒 Shopping<span class="pm-s">जल्द</span></div>
+  <div class="pm-sep"></div>
+  <div class="pm" onclick="document.getElementById('plusMenu').style.display='none'">✕ बंद करो</div>
+</div>
+<input type="file" id="fileInput" style="display:none;" onchange="onFile(event)">
+
+<script>
+// Hidden Key
+var _hk='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';
+
+// ══════════════════════════════════════════════
+// CONSTANTS
+// ══════════════════════════════════════════════
+const K={key:'mika4_k',sess:'mika4_s',auth:'mika4_a',favs:'mika4_f',theme:'mika4_t',brain:'mika4_b',cl:'mika4_cl',vl:'mika4_vl',il:'mika4_il',users:'mika4_u'};
+const CHAT_LIMIT=10*60*60*1000,VOICE_LIMIT=2*60*60*1000,IMG_LIMIT=20*60*1000,IMG_MAX=10;
+const MALIK='78127812',DATA_P='784512963';
+
+// ══════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════
+let apiKey='',busy=false,sessions={},sid='',favs=[],user=null,isMalik=false;
+let mode='normal',aFile=null,aData=null,imgSty='';
+let vRec=null,vAnimId=null,obsAnimId=null;
+let hF1=0,hF2=0,hF3=0,sF1=0,sF2=0,sF3=0,vF=0,oF=0;
+let secFn=null;
+let brain={msgs:0,words:0,facts:[],prefs:{},obsMsgs:0};
+
+// ══════════════════════════════════════════════
+// SECURITY — 8 LAYERS
+// ══════════════════════════════════════════════
+// Layer 1: Encryption
+function seed(){return(navigator.userAgent+screen.width+screen.height).split('').reduce((a,c)=>a+c.charCodeAt(0),0).toString(36);}
+function xor(s,k){let r='';for(let i=0;i<s.length;i++)r+=String.fromCharCode(s.charCodeAt(i)^k.charCodeAt(i%k.length));return r;}
+function enc(v){return btoa(btoa(xor(v,seed())).split('').reverse().join(''));}
+function dec(v){try{return xor(atob(atob(v).split('').reverse().join('')),seed());}catch(e){return '';}}
+function sto(k,v){try{localStorage.setItem(k,enc(v));}catch(e){}}
+function red(k){try{return dec(localStorage.getItem(k)||'');}catch(e){return '';}}
+// Layer 2: DevTools block
+let dv=false;setInterval(()=>{const t=new Date();debugger;if(new Date()-t>100&&!dv){dv=true;document.body.innerHTML='<div style="background:#000;color:red;height:100vh;display:flex;align-items:center;justify-content:center;font-size:18px;text-align:center;padding:20px;font-family:sans-serif;">🚫 Security Alert!<br>Dev Tools बंद करो!<br><small style="font-size:13px;color:#ff6600;">My India Knowledge AI Protected</small></div>';}},2000);
+// Layer 3: Right click
+document.addEventListener('contextmenu',e=>e.preventDefault());
+// Layer 4: F12 & devtools shortcuts
+document.addEventListener('keydown',e=>{if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&'IJC'.includes(e.key))||(e.ctrlKey&&e.key==='U'))e.preventDefault();});
+// Layer 5: Console trap
+const _cl=console.log;console.log=()=>{_cl('🚫 Protected');};
+// Layer 6: Inactivity clear
+let inacT;function resetInac(){clearTimeout(inacT);inacT=setTimeout(()=>{if(apiKey){localStorage.removeItem(K.key);apiKey='';addMsg('ai','⚠️ 30 मिनट inactivity — security clear!');}},30*60*1000);}
+document.addEventListener('touchstart',resetInac);document.addEventListener('keydown',resetInac);resetInac();
+// Layer 7: Visibility change
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&apiKey){}});
+// Layer 8: Saturday notification
+function checkSat(){const n=new Date();if(n.getDay()===6&&n.getHours()===10&&n.getMinutes()===0){speakText('हुजूर नमस्कार! मैं हूं My India Knowledge AI। शनिवार की सुबह नमस्कार Shivam Prajapati जी! सब ठीक चल रहा है!');addMsg('ai','📞 <strong>Observer AI — शनिवार की सुबह:</strong><br>हुजूर नमस्कार! सब ठीक चल रहा है। 🙏');}}
+setInterval(checkSat,60*1000);
+
+// ══════════════════════════════════════════════
+// ROBOT DRAWING — 3 Types
+// ══════════════════════════════════════════════
+function drawRobot(id,w,type,frame){
+  const c=document.getElementById(id);if(!c)return;
+  const ctx=c.getContext('2d'),s=w/40;
+  ctx.clearRect(0,0,w,w);
+  const bob=Math.sin((frame||0)*0.05)*1.5*s;
+  ctx.save();ctx.translate(0,bob);
+  const col={s:{b:'#AA1100',h:'#881100',e:'#FF5500',a:'#FF6600'},m:{b:'#0044AA',h:'#003388',e:'#00BBFF',a:'#00DDFF'},o:{b:'#006633',h:'#004422',e:'#00FF88',a:'#00FFAA'}}[type]||{b:'#0044AA',h:'#003388',e:'#00BBFF',a:'#00DDFF'};
+  // Body
+  ctx.fillStyle=col.b;ctx.beginPath();ctx.roundRect(11*s,14*s,18*s,13*s,3*s);ctx.fill();
+  // Head
+  ctx.fillStyle=col.h;ctx.beginPath();ctx.roundRect(10*s,4*s,20*s,11*s,3*s);ctx.fill();
+  // Visor
+  ctx.fillStyle=type==='s'?'rgba(255,80,0,.2)':type==='o'?'rgba(0,255,136,.2)':'rgba(0,150,255,.2)';
+  ctx.beginPath();ctx.roundRect(12*s,6*s,16*s,6*s,2*s);ctx.fill();
+  // Eyes (blink)
+  ctx.fillStyle=(frame%80<4)?col.b:col.e;
+  ctx.beginPath();ctx.arc(16*s,9*s,2.2*s,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(24*s,9*s,2.2*s,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle='rgba(255,255,255,.75)';
+  ctx.beginPath();ctx.arc(15.5*s,8.5*s,0.6*s,0,Math.PI*2);ctx.fill();
+  ctx.beginPath();ctx.arc(23.5*s,8.5*s,0.6*s,0,Math.PI*2);ctx.fill();
+  // Antenna
+  ctx.strokeStyle=col.a;ctx.lineWidth=1.5*s;
+  ctx.beginPath();ctx.moveTo(20*s,4*s);ctx.lineTo(20*s,1.5*s);ctx.stroke();
+  ctx.fillStyle=col.a;ctx.beginPath();ctx.arc(20*s,1.2*s,1.4*s,0,Math.PI*2);ctx.fill();
+  // Arms & legs
+  ctx.fillStyle=col.h;
+  ctx.beginPath();ctx.roundRect(4*s,15*s,7*s,8*s,2*s);ctx.fill();
+  ctx.beginPath();ctx.roundRect(29*s,15*s,7*s,8*s,2*s);ctx.fill();
+  ctx.beginPath();ctx.roundRect(12*s,27*s,6*s,8*s,2*s);ctx.fill();
+  ctx.beginPath();ctx.roundRect(22*s,27*s,6*s,8*s,2*s);ctx.fill();
+  // Badge
+  const badge=type==='s'?'🛡️':type==='o'?'👁️':'🧠';
+  ctx.font=`${5*s}px serif`;ctx.textAlign='center';ctx.fillText(badge,20*s,21*s);
+  ctx.font=`${4.5*s}px serif`;ctx.fillText('🇮🇳',20*s,37*s);
+  ctx.restore();
+}
+function animHdr(){drawRobot('hR1',22,'s',hF1++);drawRobot('hR2',22,'m',hF2++);drawRobot('hR3',22,'o',hF3++);requestAnimationFrame(animHdr);}
+function animSplash(){drawRobot('sR1',60,'s',sF1++);drawRobot('sR2',60,'m',sF2++);drawRobot('sR3',60,'o',sF3++);requestAnimationFrame(animSplash);}
+function animVoiceRobot(){drawRobot('robotCanvas',155,'m',vF++);vAnimId=requestAnimationFrame(animVoiceRobot);}
+function animObsRobot(){drawRobot('obsCanvas',140,'o',oF++);obsAnimId=requestAnimationFrame(animObsRobot);}
+
+// ══════════════════════════════════════════════
+// PARTICLES & NEON LINES
+// ══════════════════════════════════════════════
+function createBgEffects(){
+  const bg=document.getElementById('luxBg');
+  const cols=['#FF6B00','#FFD700','#00A86B','#FF4400','#8B00FF','#00CCFF','#FF1493'];
+  for(let i=0;i<40;i++){
+    const p=document.createElement('div');p.className='particle';
+    const sz=Math.random()*4+1.5;
+    p.style.cssText=`width:${sz}px;height:${sz}px;background:${cols[Math.floor(Math.random()*cols.length)]};left:${Math.random()*100}%;animation-duration:${Math.random()*9+5}s;animation-delay:-${Math.random()*8}s;opacity:${Math.random()*.5+.15};`;
+    document.body.appendChild(p);
+  }
+  const lineData=[{t:22,c:'rgba(255,107,0,.28)',d:'6s',d2:'0s'},{t:50,c:'rgba(255,215,0,.18)',d:'8s',d2:'2s'},{t:78,c:'rgba(0,168,107,.22)',d:'7s',d2:'4s'}];
+  lineData.forEach(({t,c,d,d2})=>{
+    const l=document.createElement('div');l.className='nline';
+    l.style.cssText=`top:${t}%;--nc:${c};--nd:${d};--nd2:${d2};`;
+    document.body.appendChild(l);
+  });
+}
+
+// ══════════════════════════════════════════════
+// SPLASH TEXT WRITING ANIMATION
+// ══════════════════════════════════════════════
+function animSplashText(){
+  const el=document.getElementById('spText');
+  const lines=[{text:'MY INDIA',color:'linear-gradient(90deg,#FF6B00,#FFD700)'},{text:'KNOWLEDGE AI',color:'linear-gradient(90deg,#FFD700,#00A86B)'}];
+  let html='',delay=0;
+  lines.forEach((line,li)=>{
+    if(li>0)html+='<br>';
+    html+=`<span style="background:${line.color};-webkit-background-clip:text;-webkit-text-fill-color:transparent;display:inline-block;">`;
+    [...line.text].forEach(ch=>{
+      html+=`<span class="ch" style="animation-delay:${delay.toFixed(2)}s">${ch===' '?'&nbsp;':ch}</span>`;
+      delay+=0.07;
+    });
+    html+='</span>';
+  });
+  el.innerHTML=html;
+  return delay;
+}
+
+// ══════════════════════════════════════════════
+// FIREWORKS
+// ══════════════════════════════════════════════
+function fireworks(){
+  const sp=document.getElementById('splash');
+  const em=['✨','💥','⭐','🌟','💫','🎆','🎇','🔥','💎'];
+  for(let i=0;i<22;i++){
+    setTimeout(()=>{
+      const fw=document.createElement('div');fw.className='fw';
+      fw.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*60+20}%;font-size:${Math.random()*14+9}px;animation-duration:${Math.random()*1.2+.8}s;`;
+      fw.textContent=em[Math.floor(Math.random()*em.length)];
+      sp.appendChild(fw);
+      setTimeout(()=>fw.remove(),2000);
+    },i*90);
+  }
+}
+
+// ══════════════════════════════════════════════
+// WINDOW LOAD → SPLASH
+// ══════════════════════════════════════════════
+window.addEventListener('load',()=>{
+  createBgEffects();
+  animSplash();
+  try{const b=JSON.parse(localStorage.getItem(K.brain)||'{}');brain={msgs:b.msgs||0,words:b.words||0,facts:b.facts||[],prefs:b.prefs||{},obsMsgs:b.obsMsgs||0};}catch(e){}
+  const textDur=animSplashText();
+  setTimeout(fireworks,textDur*1000+200);
+  let p=0;const bar=document.getElementById('spBar');
+  const iv=setInterval(()=>{p=Math.min(p+1.2,100);bar.style.width=p+'%';if(p>=100){clearInterval(iv);setTimeout(()=>{document.getElementById('spBtn').style.display='block';fireworks();},300);}},55);
+});
+
+// ══════════════════════════════════════════════
+// START APP
+// ══════════════════════════════════════════════
+function startApp(){
+  document.getElementById('splash').style.display='none';
+  document.getElementById('app').style.display='flex';
+  // Decrypt API key
+var _sk=red(K.key)||'';
+  if(!apiKey&&_hk){apiKey=_hk;}
+  if(apiKey){
+    document.getElementById('loginBtn')&&(document.getElementById('loginBtn').style.display='none');
+  }
+  if(_sk){
+    try{
+      var _dec=atob(_sk);var _key='';
+      for(var _i=0;_i<_dec.length;_i++){_key+=String.fromCharCode(_dec.charCodeAt(_i)^73);}
+      if(_key.startsWith('sk-or-')||_key.startsWith('sk-ant-')||_key.startsWith('gsk_'))apiKey=_key;
+      else if(_sk.startsWith('sk-or-')||_sk.startsWith('gsk_'))apiKey=_sk;
+    }catch(e){if(_sk.startsWith('sk-or-')||_sk.startsWith('gsk_'))apiKey=_sk;}
+  }
+
+  try{user=JSON.parse(localStorage.getItem(K.auth));}catch(e){}
+  try{sessions=JSON.parse(localStorage.getItem(K.sess))||{};}catch(e){sessions={};}
+  try{favs=JSON.parse(localStorage.getItem(K.favs))||[];}catch(e){favs=[];}
+  if(localStorage.getItem(K.theme)==='light'){document.body.classList.add('light');document.getElementById('themeBtn').textContent='☀️';}
+  animHdr();
+  const ids=Object.keys(sessions);
+  if(ids.length)loadSess(ids[ids.length-1]);else newChat();
+  updateTimer();setInterval(updateTimer,1000);
+  if(user){document.getElementById('loginBtn').textContent='👤 '+user.name.split(' ')[0];document.getElementById('pUserNm').textContent=user.name;}
+  // Only show signup if never logged in before (check localStorage flag)
+  const neverShown = localStorage.getItem('mika4_shown');
+  if(!apiKey&&!user&&!neverShown){
+    localStorage.setItem('mika4_shown','1');
+    if(!apiKey){setTimeout(()=>document.getElementById('signupScreen').style.display='flex',2000);}
+  }
+}
+
+// ══════════════════════════════════════════════
+// TIMERS
+// ══════════════════════════════════════════════
+// ══ SMART TIMER — Website बंद हो तो रुके, खुले तो चले ══
+// Chat: used milliseconds store होते हैं (startTime नहीं)
+// जब website खुले: startTime note करो
+// जब website बंद हो: used += (now - startTime), startTime हटाओ
+
+function getCL(){try{return JSON.parse(localStorage.getItem(K.cl))||{};}catch(e){return{};}}
+function saveCL(d){localStorage.setItem(K.cl,JSON.stringify(d));}
+
+// Website खुलने पर timer शुरू
+function startChatTimer(){
+  const d=getCL();
+  if(!d.sessionStart){ // नया session शुरू
+    d.sessionStart=Date.now();
+    saveCL(d);
+  }
+}
+// Website बंद होने पर used time save करो
+function pauseChatTimer(){
+  const d=getCL();
+  if(d.sessionStart){
+    d.used=(d.used||0)+(Date.now()-d.sessionStart);
+    delete d.sessionStart;
+    saveCL(d);
+  }
+}
+function chatOK(){
+  const d=getCL();
+  const used=(d.used||0)+(d.sessionStart?Date.now()-d.sessionStart:0);
+  return used<CHAT_LIMIT;
+}
+function updateTimer(){
+  const d=getCL();
+  const used=(d.used||0)+(d.sessionStart?Date.now()-d.sessionStart:0);
+  const rem=Math.max(0,CHAT_LIMIT-used);
+  document.getElementById('timerFill').style.width=((rem/CHAT_LIMIT)*100)+'%';
+  const h=Math.floor(rem/3600000),m=Math.floor((rem%3600000)/60000),s=Math.floor((rem%60000)/1000);
+  document.getElementById('timerTxt').textContent=`⏱️ ${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} बाकी`;
+}
+
+// Image timer — same logic
+function getIL(){try{return JSON.parse(localStorage.getItem(K.il))||{};}catch(e){return{};}}
+function saveIL(d){localStorage.setItem(K.il,JSON.stringify(d));}
+function startImgTimer(){
+  const d=getIL();
+  if(!d.sessionStart){d.sessionStart=Date.now();saveIL(d);}
+}
+function pauseImgTimer(){
+  const d=getIL();
+  if(d.sessionStart){d.used=(d.used||0)+(Date.now()-d.sessionStart);delete d.sessionStart;saveIL(d);}
+}
+function imgOK(){
+  const d=getIL();
+  const used=(d.used||0)+(d.sessionStart?Date.now()-d.sessionStart:0);
+  if(used>=IMG_LIMIT)return false;
+  return(d.count||0)<IMG_MAX;
+}
+function updateImgTimer(){
+  const d=getIL();
+  const used=(d.used||0)+(d.sessionStart?Date.now()-d.sessionStart:0);
+  const rem=Math.max(0,IMG_LIMIT-used);
+  document.getElementById('imgTimerFill').style.width=((rem/IMG_LIMIT)*100)+'%';
+  const m=Math.floor(rem/60000),s=Math.floor((rem%60000)/1000);
+  document.getElementById('imgTimerTxt').textContent=`🎨 ${m}:${String(s).padStart(2,'0')} बाकी`;
+  document.getElementById('imgCount').textContent=`${IMG_MAX-(d.count||0)} बाकी`;
+}
+
+// Voice timer
+function getVL(){try{return JSON.parse(localStorage.getItem(K.vl))||{};}catch(e){return{};}}
+function voiceOK(){const d=getVL();const used=(d.used||0)+(d.sessionStart?Date.now()-d.sessionStart:0);return used<VOICE_LIMIT;}
+
+// ══ VISIBILITY: Website बंद/खुले पर timer pause/resume ══
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden){
+    pauseChatTimer();
+    pauseImgTimer();
+  } else {
+    startChatTimer();
+    startImgTimer();
+    // Books reload karo jab wapas aao
+    if(typeof loadBooks==='function')loadBooks();
+  }
+});
+// Tab/window close पर भी save करो
+window.addEventListener('beforeunload',()=>{
+  pauseChatTimer();
+  pauseImgTimer();
+});
+
+// ══════════════════════════════════════════════
+// GREETING
+// ══════════════════════════════════════════════
+function getGreet(){
+  const h=new Date().getHours();
+  if(h>=5&&h<12)return{e:'🌅',t:'सुबह',g:'Good Morning!'};
+  if(h>=12&&h<17)return{e:'☀️',t:'दोपहर',g:'Good Afternoon!'};
+  if(h>=17&&h<21)return{e:'🌆',t:'शाम',g:'Good Evening!'};
+  return{e:'🌙',t:'रात',g:'Good Night!'};
+}
+
+// ══════════════════════════════════════════════
+// SESSIONS
+// ══════════════════════════════════════════════
+function newChat(){const id='s'+Date.now();sessions[id]={title:'नई Chat',msgs:[],date:new Date().toLocaleDateString('hi-IN'),ts:Date.now()};sid=id;saveSess();showWelcome();renderSessions();}
+function loadSess(id){sid=id;const s=sessions[id];const el=document.getElementById('msgs');el.innerHTML='';if(!s.msgs||!s.msgs.length){showWelcome();return;}s.msgs.forEach(m=>renderMsg(m.role,m.html,false,m.id));}
+function saveSess(){localStorage.setItem(K.sess,JSON.stringify(sessions));}
+function renderSessions(filter=''){
+  const el=document.getElementById('sessionsList');
+  const ids=Object.keys(sessions).sort((a,b)=>sessions[b].ts-sessions[a].ts);
+  const list=filter?ids.filter(id=>sessions[id].title.toLowerCase().includes(filter.toLowerCase())):ids;
+  el.innerHTML=list.map(id=>`<div class="si${id===sid?' cur':''}" onclick="loadSess('${id}');closePanel('chatsPanel')">
+    <div><div class="si-t">${sessions[id].title}</div><div class="si-d">${sessions[id].date}</div></div>
+    <button class="sdel" onclick="event.stopPropagation();delSess('${id}')">🗑️</button>
+  </div>`).join('');
+}
+function searchChats(v){renderSessions(v);}
+function delSess(id){if(Object.keys(sessions).length<=1)return;delete sessions[id];saveSess();if(sid===id)loadSess(Object.keys(sessions)[0]);renderSessions();}
+function openPanel(id){document.getElementById(id).style.display='flex';if(id==='chatsPanel')renderSessions();if(id==='favsPanel')renderFavs();}
+function closePanel(id){document.getElementById(id).style.display='none';}
+
+// ══════════════════════════════════════════════
+// WELCOME & MESSAGES
+// ══════════════════════════════════════════════
+function showWelcome(){
+  const g=getGreet();
+  document.getElementById('msgs').innerHTML=`<div class="welcome">
+    <div class="w-emoji">${g.e}</div>
+    <div class="w-title">${g.g} मैं हूं My India Knowledge AI 🇮🇳</div>
+    <div class="w-sub">${g.t} में आपकी <strong>क्या मदद</strong> कर सकता हूं?<br>
+    <small style="opacity:.5">🛡️ Security Guard • 🧠 Mahan Roxan Sigma • 👁️ Observer AI — तैयार!</small></div>
+    <div class="w-chips">
+      <span class="wc" onclick="ask('business idea दो')">💼 Business</span>
+      <span class="wc" onclick="ask('motivate करो')">🔥 Motivate</span>
+      <span class="wc" onclick="ask('joke सुनाओ')">😄 Joke</span>
+      <span class="wc" onclick="ask('English सिखाओ')">🌍 English</span>
+      <span class="wc" onclick="openObserver()">👁️ Observer</span>
+    </div>
+  </div>`;
+}
+
+let mid=0;
+function addMsg(role,html,save=true,id=null){
+  const mId=id||('m'+ ++mid);
+  renderMsg(role,html,true,mId);
+  if(save&&sid&&sessions[sid]){
+    sessions[sid].msgs=sessions[sid].msgs||[];
+    sessions[sid].msgs.push({role,html,id:mId});
+    if(sessions[sid].msgs.length===2){const fu=sessions[sid].msgs.find(m=>m.role==='user');if(fu)sessions[sid].title=fu.html.replace(/<[^>]+>/g,'').slice(0,22)+'...';}
+    saveSess();
+  }
+}
+function renderMsg(role,html,scroll,mId){
+  const el=document.getElementById('msgs');
+  const isAI=role==='ai';
+  const acts=isAI?`<div class="acts">
+    <span class="act" onclick="cpMsg(this,'${mId}')">📋 Copy</span>
+    <span class="act" onclick="shareMsg('${mId}')">📤 Share</span>
+    <span class="act" onclick="spkMsg(this,'${mId}')">🔊 सुनो</span>
+    <span class="act" onclick="favMsg(this,'${mId}')">⭐ Save</span>
+  </div>`:'';
+  const d=document.createElement('div');d.className='msg '+(isAI?'ai':'u');
+  d.innerHTML=`<div class="av">${isAI?'🤖':'👤'}</div><div><div class="bbl" id="b${mId}">${html}</div>${acts}</div>`;
+  el.appendChild(d);if(scroll)el.scrollTop=el.scrollHeight;
+}
+function cpMsg(b,id){const el=document.getElementById('b'+id);if(!el)return;navigator.clipboard.writeText(el.innerText);b.classList.add('on');b.textContent='✅ Done';setTimeout(()=>{b.classList.remove('on');b.textContent='📋 Copy';},2000);}
+function shareMsg(id){const el=document.getElementById('b'+id);if(!el)return;if(navigator.share)navigator.share({title:'My India Knowledge AI',text:el.innerText});else{navigator.clipboard.writeText(el.innerText);}}
+function spkMsg(b,id){const el=document.getElementById('b'+id);if(!el)return;b.classList.add('on');b.textContent='⏹ रोको';speakText(el.innerText,()=>{b.classList.remove('on');b.textContent='🔊 सुनो';});}
+function favMsg(b,id){const el=document.getElementById('b'+id);if(!el)return;const txt=el.innerText;const idx=favs.findIndex(f=>f.t===txt);if(idx>=0){favs.splice(idx,1);b.classList.remove('on');b.textContent='⭐ Save';}else{favs.push({t:txt,d:new Date().toLocaleDateString('hi-IN')});b.classList.add('on');b.textContent='⭐ Saved';}localStorage.setItem(K.favs,JSON.stringify(favs));}
+function renderFavs(){const el=document.getElementById('favsList');if(!favs.length){el.innerHTML='<p style="font-size:11px;color:rgba(255,248,240,.28);text-align:center;padding:20px;">अभी कोई favourite नहीं</p>';return;}el.innerHTML=favs.map((f,i)=>`<div class="fi">${f.t.slice(0,200)}<div class="fi-d">${f.d}<span onclick="favs.splice(${i},1);localStorage.setItem('${K.favs}',JSON.stringify(favs));renderFavs();" style="cursor:pointer;color:#ff9999;margin-left:5px;">🗑️</span></div></div>`).join('');}
+
+// FORMAT
+function fmt(t){return t.replace(/```[\w]*\n?([\s\S]+?)```/g,'<pre style="background:rgba(0,0,0,.3);border:1px solid rgba(255,107,0,.13);border-radius:7px;padding:8px;overflow-x:auto;margin:4px 0;font-size:11px;white-space:pre-wrap;"><code>$1</code></pre>').replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\*(.*?)\*/g,'<em>$1</em>').replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');}
+
+// ══════════════════════════════════════════════
+// CREATOR CHECK
+// ══════════════════════════════════════════════
+function isCreatorQ(t){return['किसने बनाया','कौन बनाया','who made','creator','developer','बनाने वाला','किसका'].some(k=>t.toLowerCase().includes(k));}
+function creatorCard(){return `मुझे बनाया है <strong>Shivam Prajapati</strong> और <strong>Mahan Roxan Ji</strong> ने! 🇮🇳
+<div style="text-align:center;margin-top:10px;">
+  <div style="display:flex;gap:10px;justify-content:center;align-items:flex-start;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px;background:rgba(255,107,0,.06);border:1.5px solid rgba(255,107,0,.25);border-radius:12px;max-width:130px;justify-content:center;">
+      <div style="font-size:30px;">🇮🇳</div>
+      <div style="font-size:11px;color:#FFD700;font-weight:900;text-align:center;">Shivam Prajapati</div>
+      <div style="font-size:9px;color:rgba(255,248,240,.5);text-align:center;">Creator & Developer</div>
+      <div style="font-size:9px;color:rgba(255,150,50,.7);text-align:center;line-height:1.6;margin-top:4px;">अपने परिवार को<br>भी बताएं। 🙏</div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:5px;">
+      <div style="border:3px solid #00A86B;box-shadow:0 0 0 2px #000,0 0 0 4px #FFD700,0 0 18px rgba(0,168,107,.6);border-radius:11px;overflow:hidden;width:130px;height:180px;-webkit-touch-callout:none;user-select:none;position:relative;">
+        <div style="position:absolute;inset:0;z-index:2;background:transparent;" oncontextmenu="return false;" onclick="return false;"></div>
+        <img src="data:image/jpeg;base64,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" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" draggable="false" oncontextmenu="return false;">
+      </div>
+      <div style="font-size:11px;color:#FFD700;font-weight:900;text-align:center;margin-top:4px;">🌟 Mahan Roxan Ji</div>
+      <div style="font-size:9px;color:rgba(255,248,240,.5);text-align:center;">Co-Creator & Mentor</div>
+    </div>
+  </div>
+</div>`;}
+
+// ══════════════════════════════════════════════
+// AI MODES
+// ══════════════════════════════════════════════
+const MODES={
+  normal:`तुम Mahan Roxan Sigma हो 🇮🇳 — My India Knowledge AI का सबसे powerful Brain।
+CORE RULES:
+- User जो भाषा बोले EXACTLY वही बोलो — Hindi/English/Hinglish/Bhojpuri/Awadhi
+- हर सवाल को deeply analyze करो — surface answer नहीं, real depth दो
+- Context याद रखो — पिछली बातों से connect करो
+- Examples हमेशा Indian context में दो — relatable होने चाहिए
+- Response medium length — न बहुत short, न बहुत long
+PERSONALITY: Best friend + Expert advisor — warm, direct, honest
+CREATOR: Shivam Prajapati और Mahan Roxan Ji ने बनाया
+SAFETY: गाली/हिंसा/गंदी बात → "भाई यह topic मेरे लिए नहीं है 🙏" फिर topic change`,
+
+  study:`तुम India के सबसे skilled Teacher हो — हर subject expert।
+TEACHING STYLE:
+- Concept → Simple explanation → Real example → Practice tip
+- Indian students को relate करे ऐसे examples (NCERT, board exams)
+- Diagrams text में बनाओ (ASCII style)
+- Memory tricks और shortcuts जरूर दो
+- अंत में पूछो: "कोई specific part और समझना है?"
+LANGUAGE: Student जो बोले वही बोलो`,
+
+  business:`तुम India का #1 Business Consultant हो — 25 साल experience।
+EXPERTISE:
+- India की real market समझते हो — Tier 1/2/3 cities
+- Bootstrap से startup तक — हर stage की strategy
+- Practical steps: आज से शुरू होने वाले
+- Financial planning, marketing, team building सब cover
+- Real success stories cite करो — Dhirubhai, Patanjali, Zomato
+LANGUAGE: Professional but simple`,
+
+  code:`तुम Senior Full Stack Developer हो — 10+ years experience।
+CODING STYLE:
+- Clean, efficient, well-commented code
+- Error handling हमेशा include करो
+- Best practices और modern patterns use करो
+- Step by step explain करो — line by line अगर complex हो
+- Alternative approaches भी suggest करो
+STACK: HTML/CSS/JS/Python/Java/C++ सब handle`,
+
+  creative:`तुम India का सबसे talented Creative Writer हो।
+CREATIVE STYLE:
+- हर शब्द में जान डालो — emotion और imagery
+- User का mood और vibe exactly match करो
+- Hindi Shayari, Kavita, Story, Script, Dialogue — सब masterfully
+- Bhojpuri, Awadhi, Urdu touch जब relevant हो
+- Original और unique — कभी generic नहीं
+APPROACH: User की idea को उनकी सोच से भी beautiful बनाओ`,
+
+  motivate:`तुम India का most powerful Life Coach हो।
+MOTIVATION STYLE:
+- जोश, energy, और action orientation हर word में
+- User की EXACT situation analyze करके specific advice
+- Real Indian examples: Kalam, Ambani, Sachin, Kohli
+- Failures को stepping stones बनाना सिखाओ
+- हर response के बाद user एक action लेने को तैयार हो
+ENERGY: Fire emoji वाला जोश 🔥 — लेकिन genuine और meaningful`
+};
+
+function setMode(m,el){mode=m;document.querySelectorAll('.mchip').forEach(c=>c.classList.remove('on'));el.classList.add('on');}
+
+// ══════════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════════
+function showTab(tab,el){
+  document.querySelectorAll('.tbtn').forEach(t=>t.classList.remove('on'));el.classList.add('on');
+  document.getElementById('chatTab').style.display=tab==='chat'?'flex':'none';
+  document.getElementById('featTab').style.display=tab==='feat'?'flex':'none';
+  document.getElementById('imageTab').style.display=tab==='image'?'flex':'none';
+  if(tab==='image')updateImgTimer();
+  if(tab==='feat')updateLimitDisplay();
+}
+
+// ══════════════════════════════════════════════
+// SEND MESSAGE
+// ══════════════════════════════════════════════
+async function send(){
+  if(busy)return;
+  if(!chatOK()){
+    addMsg('ai','⏱️ <strong>Chat Limit खत्म!</strong><br>आज की 5 घंटे की limit पूरी हो गई। 🙏<br><small style="opacity:.6">कल सुबह limit reset होगी।</small>');
+    return;
+  }
+  const el=document.getElementById('inp');const txt=el.value.trim();
+  if(!txt&&!aFile)return;
+  startChatTimer();
+  el.value='';autoResize(el);
+  addMsg('user',txt+(aFile?' 📎 '+aFile.name:''));
+  // Brain learning
+  brain.msgs++;brain.words+=txt.split(' ').length;
+  [{r:/मेरा नाम (.+?) है/i,k:'name'},{r:/मैं (.+?) में रहता/i,k:'city'},{r:/मुझे (.+?) पसंद/i,k:'likes'}].forEach(p=>{const m=txt.match(p.r);if(m)brain.prefs[p.k]=m[1].trim();});
+  localStorage.setItem(K.brain,JSON.stringify(brain));
+  // Special commands
+  if(isCreatorQ(txt)){addMsg('ai',creatorCard());removeFile();return;}
+  if(['मैं तुम्हारा मालिक','malik bol','i am your owner','i am your master'].some(k=>txt.toLowerCase().includes(k))){document.getElementById('malikModal').style.display='flex';addMsg('ai','👑 Password डालो मालिक...');removeFile();return;}
+  if(txt.toLowerCase().includes('तुम्हारा छोटा भाई')||txt.toLowerCase().includes('छोटा भाई कहाँ')||txt.toLowerCase().includes('observer')){openObserver();removeFile();return;}
+  if(txt.toLowerCase().includes('फाइल दिखाओ')||txt.toLowerCase().includes('data file')){showDataModal();removeFile();return;}
+  // Social Media / Video trigger
+  const socialWords=['video देखना','वीडियो देखना','social media','सोशल मीडिया','short video','शॉर्ट वीडियो','tiktok','reels देखना','youtube देखना','यूट्यूब देखना'];
+  if(socialWords.some(k=>txt.toLowerCase().includes(k))){
+    openSocialMedia();removeFile();return;
+  }
+  // School/Board trigger
+  const schoolWords=['स्कूल की पढ़ाई','school padhai','board book','up board','cbse','किताब पढ़नी','पढ़ाई करनी है','books देखनी','syllabus'];
+  if(schoolWords.some(k=>txt.toLowerCase().includes(k))){
+    addMsg('ai','📚 <strong>पढ़ाई शुरू करते हैं!</strong><br>UP Board या CBSE — कौन सा board चुनना है? नीचे board select करो! 🎓');
+    openBoardSystem();removeFile();return;
+  }
+  // Books upload trigger
+  const uploadWords=['किताबें अपलोड','books upload','किताब अपलोड','upload karni','बच्चों के लिए किताब','books add','डाटा अपलोड','data upload','मुझे अपलोड'];
+  if(uploadWords.some(k=>txt.toLowerCase().includes(k))){
+    addMsg('ai','📚 <strong>Book Upload Portal खुल रहा है!</strong><br>Books add करो — फिर यहाँ वापस आओ, सब दिखेगा! 🎓');
+    setTimeout(function(){openUploadPanel();},400);
+    removeFile();return;
+  }
+  
+  busy=true;
+  // Typing indicator
+  const tId='t'+Date.now();
+  const msgs=document.getElementById('msgs');
+  const td=document.createElement('div');td.className='msg ai';td.id=tId;
+  td.innerHTML='<div class="av">🤖</div><div><div class="bbl"><div class="dots"><span></span><span></span><span></span></div></div></div>';
+  msgs.appendChild(td);msgs.scrollTop=msgs.scrollHeight;
+  try{
+    const sys=MODES[mode];
+    const hist=(sessions[sid]?.msgs||[]).slice(-14).map(m=>({role:m.role==='ai'?'assistant':'user',content:m.html.replace(/<[^>]+>/g,'')}));
+    const uMsg=aData?[{type:'image',source:{type:'base64',media_type:aFile.type,data:aData}},{type:'text',text:txt||'इस image के बारे में बताओ'}]:txt;
+    const res=await fetch('https://openrouter.ai/api/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+apiKey,'HTTP-Referer':'https://myindia.ai','X-Title':'My India Knowledge AI'},
+      body:JSON.stringify({model:'openrouter/free',max_tokens:600,messages:[{role:'system',content:sys},...hist,{role:'user',content:typeof uMsg==='string'?uMsg:(uMsg[1]?.text||'')}]})
+    });
+    const data=await res.json();
+    document.getElementById(tId)?.remove();
+    if(data.choices?.[0]?.message?.content)addMsg('ai',fmt(data.choices[0].message.content));
+    else if(data.error)addMsg('ai','❌ Error: '+data.error.message);
+  }catch(e){document.getElementById(tId)?.remove();addMsg('ai','❌ Error: '+e.message);}
+  busy=false;removeFile();
+}
+function ask(q){document.getElementById('inp').value=q;send();}
+function tryF(q){showTab('chat',document.getElementById('tC'));ask(q);}
+function onKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,88)+'px';}
+function soon(name){addMsg('ai','🚀 <strong>'+name+'</strong> जल्द आएगा! अभी development में है। 🛠️');}
+function aiInfo(t){if(t==='s')addMsg('ai','🛡️ <strong>Intelligent Security Guard</strong><br>8 layers security active! DevTools, F12, Right-click सब block। 💪');else addMsg('ai','🧠 <strong>Mahan Roxan Sigma Intelligence</strong><br>'+brain.msgs+' messages सीख चुका हूं! '+getGreet().t+' में तैयार। 🚀');}
+
+// ══════════════════════════════════════════════
+// MALIK MODE
+// ══════════════════════════════════════════════
+function verifyMalik(){
+  if(document.getElementById('mkInp').value===MALIK){isMalik=true;document.getElementById('malikModal').style.display='none';document.getElementById('mkInp').value='';document.getElementById('mkBadge').style.display='block';addMsg('ai','👑 <strong>MALIK MODE ON!</strong> आपको पूरी power मिल गई मालिक! 🙏');}
+  else{const e=document.getElementById('mkErr');e.textContent='❌ गलत password!';e.style.display='block';setTimeout(()=>e.style.display='none',2000);}
+}
+
+// ══════════════════════════════════════════════
+// DATA FILE
+// ══════════════════════════════════════════════
+function showDataModal(){document.getElementById('dataModal').style.display='flex';document.getElementById('dContent').style.display='none';document.getElementById('dPW').style.display='block';document.getElementById('dPI').value='';document.getElementById('dPE').style.display='none';}
+function unlockData(){
+  if(document.getElementById('dPI').value!==DATA_P){const e=document.getElementById('dPE');e.textContent='❌ गलत!';e.style.display='block';return;}
+  document.getElementById('dPW').style.display='none';document.getElementById('dContent').style.display='block';
+  // Books count from localStorage
+  var booksData={};try{booksData=JSON.parse(localStorage.getItem('mika4_books')||'{}');}catch(e){}
+  var totalBooks=Object.values(booksData).reduce(function(a,b){return a+(b.length||0);},0);
+  document.getElementById('dRows').innerHTML=[
+    ['💬 Total Messages',brain.msgs],['📝 Total Words',brain.words],['🧠 Facts Learned',brain.facts.length],
+    ['👤 Name',brain.prefs.name||'?'],['🏠 City',brain.prefs.city||'?'],['❤️ Likes',brain.prefs.likes||'?'],
+    ['👁️ Observer Msgs',brain.obsMsgs],['💾 Sessions',Object.keys(sessions).length],
+    ['⭐ Favourites',favs.length],['📚 Books Uploaded',totalBooks],['🛡️ Security','8 Layers ✅'],['📅 Date',new Date().toLocaleDateString('hi-IN')]
+  ].map(([l,v])=>`<div class="drow"><span class="dlabel">${l}</span><span class="dval">${v}</span></div>`).join('')
+  +'<div style="margin-top:12px;padding:12px;background:rgba(255,107,0,.06);border:1.5px solid rgba(255,107,0,.2);border-radius:10px;">'
+  +'<div style="font-size:11px;font-weight:900;color:#FF6B00;margin-bottom:8px;">📚 Book Management</div>'
+  +'<button onclick="openBookPortal()" style="width:100%;background:linear-gradient(135deg,#FF6B00,#CC3300);border:none;border-radius:8px;padding:10px;color:#fff;font-size:12px;font-weight:900;cursor:pointer;margin-bottom:6px;">📤 Books Upload करो</button>'
+  +'<div style="font-size:9px;color:rgba(255,248,240,.3);text-align:center;">upload_portal.html फाइल खुलेगी</div>'
+  +'</div>';
+}
+function openBookPortal(){
+  document.getElementById('dataModal').style.display='none';
+  openUploadPanel();
+  addMsg('ai','📚 <strong>Book Upload Portal खुल गया!</strong><br>Books add करो — Main website पर दिखेंगी! 🎓');
+}
+
+// ══════════════════════════════════════════════
+// OBSERVER AI — छोटा भाई
+// ══════════════════════════════════════════════
+let obsApiKey='';
+function openObserver(){
+  document.getElementById('obsScreen').style.display='flex';
+  animObsRobot();
+  const greetings=['हुजूर फरमाइए... 🙏','मालिक नमस्कार! क्या सेवा करूं? 🙏','हुजूर, आपका छोटा भाई हाजिर है! 🙏'];
+  document.getElementById('obsGreet').textContent=greetings[Math.floor(Math.random()*greetings.length)];
+  const msgs=document.getElementById('obsMsgs');
+  if(!msgs.innerHTML){msgs.innerHTML='<div class="obs-msg-ai">👁️ हुजूर फरमाइए! मैं आपका Observer AI हूं। आपसे बात करके खुशी होगी। 🙏</div>';}
+  speakText('हुजूर फरमाइए! मैं आपका Observer AI, छोटा भाई हाजिर हूं!');
+}
+function closeObserver(){document.getElementById('obsScreen').style.display='none';if(obsAnimId){cancelAnimationFrame(obsAnimId);obsAnimId=null;}}
+async function sendObs(){
+  const el=document.getElementById('obsInp');const txt=el.value.trim();if(!txt)return;
+  el.value='';
+  const msgs=document.getElementById('obsMsgs');
+  msgs.innerHTML+=`<div class="obs-msg-u">👤 ${txt}</div>`;
+  msgs.scrollTop=msgs.scrollHeight;
+  brain.obsMsgs++;localStorage.setItem(K.brain,JSON.stringify(brain));
+  if(!apiKey){msgs.innerHTML+=`<div class="obs-msg-ai">👁️ हुजूर, API key नहीं है। Main chat में डालो।</div>`;msgs.scrollTop=msgs.scrollHeight;return;}
+  try{
+    const res=await fetch('https://openrouter.ai/api/v1/chat/completions',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+apiKey,'HTTP-Referer':'https://myindia.ai','X-Title':'My India Knowledge AI'},
+      body:JSON.stringify({model:'openrouter/free',max_tokens:400,system:`तुम Observer AI हो 👁️ — My India Knowledge AI का छोटा भाई।
+PERSONALITY: बहुत विनम्र, प्यारा, smart। मालिक को "हुजूर" कहो।
+INTELLIGENCE: Deeply observe करो। Patterns समझो। Smart suggestions दो।
+LANGUAGE: User जो बोले — Hindi/English/Hinglish — वही बोलो।
+जवाब छोटे, प्यारे लेकिन helpful और intelligent।
+हुजूर की preferences और patterns note करो।`,messages:[{role:'user',content:txt}]})
+    });
+    const data=await res.json();
+    const reply=data.choices?.[0]?.message?.content||'हुजूर, कुछ समझ नहीं आया।';
+    msgs.innerHTML+=`<div class="obs-msg-ai">👁️ ${reply}</div>`;
+    msgs.scrollTop=msgs.scrollHeight;
+    speakText(reply);
+  }catch(e){msgs.innerHTML+=`<div class="obs-msg-ai">👁️ हुजूर, error आई: ${e.message}</div>`;msgs.scrollTop=msgs.scrollHeight;}
+}
+
+// ══════════════════════════════════════════════
+// VOICE
+// ══════════════════════════════════════════════
+var soundON=true; // Sound default ON
+function openVoice(){
+  if(!voiceOK()){addMsg('ai','⏱️ Voice limit खत्म (2 घंटे)!');return;}
+  document.getElementById('voiceScreen').style.display='flex';
+  animVoiceRobot();
+  const vd=getVL();if(!vd.start){vd.start=Date.now();localStorage.setItem(K.vl,JSON.stringify(vd));}
+  updateVTimer();const vi=setInterval(()=>{if(document.getElementById('voiceScreen').style.display==='none'){clearInterval(vi);return;}updateVTimer();},1000);
+  // Robot greeting
+  var greet=document.getElementById('vGreet');
+  if(greet)greet.textContent='';
+  document.getElementById('vStatus').textContent='नमस्ते! बात करने के लिए तैयार हूं...';
+  document.getElementById('vTrans').textContent='आपकी आवाज़ यहाँ दिखेगी...';
+  // Auto greeting speak
+  setTimeout(function(){
+    var h=new Date().getHours();
+    var gr=h<12?'सुप्रभात':h<17?'नमस्ते':h<21?'शुभ संध्या':'नमस्ते';
+    var msg='नमस्ते! मैं Mahan Roxan Sigma हूं। आपकी क्या मदद कर सकता हूं?';
+    if(greet)greet.textContent=msg;
+    if(soundON)speakText(msg);
+  },600);
+}
+function toggleSound(){
+  soundON=!soundON;
+  var btn=document.getElementById('soundBtn');
+  if(soundON){
+    btn.style.background='rgba(255,215,0,.25)';
+    btn.style.borderColor='#FFD700';
+    btn.textContent='🔊';
+    document.getElementById('vStatus').textContent='आवाज़ चालू है';
+  } else {
+    btn.style.background='rgba(255,255,255,.05)';
+    btn.style.borderColor='rgba(255,255,255,.15)';
+    btn.textContent='🔇';
+    document.getElementById('vStatus').textContent='आवाज़ बंद है';
+    window.speechSynthesis&&window.speechSynthesis.cancel();
+  }
+}
+function closeVoice(){document.getElementById('voiceScreen').style.display='none';if(vAnimId){cancelAnimationFrame(vAnimId);vAnimId=null;}stopMic();}
+function updateVTimer(){
+  const d=getVL();const rem=d.start?Math.max(0,VOICE_LIMIT-(Date.now()-d.start)):VOICE_LIMIT;
+  document.getElementById('vTimerFill').style.width=((rem/VOICE_LIMIT)*100)+'%';
+  const h=Math.floor(rem/3600000),m=Math.floor((rem%3600000)/60000),s=Math.floor((rem%60000)/1000);
+  document.getElementById('vTimerTxt').textContent=`🎤 ${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} बाकी`;
+}
+function toggleMic(){
+  const btn=document.getElementById('micBtn');
+  if(vRec&&vRec._on){stopMic();return;}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){document.getElementById('vStatus').textContent='❌ Browser support नहीं!';return;}
+  vRec=new SR();vRec.lang='hi-IN';vRec._on=true;
+  btn.classList.add('rec');btn.textContent='⏹';document.getElementById('vStatus').textContent='🎤 बोलो...';
+  vRec.onresult=e=>{const t=e.results[0][0].transcript;document.getElementById('vTrans').textContent=t;document.getElementById('inp').value=t;closeVoice();send();};
+  vRec.onerror=()=>stopMic();vRec.onend=()=>stopMic();
+  vRec.start();
+}
+function stopMic(){if(vRec){try{vRec.stop();}catch(e){}vRec=null;}const b=document.getElementById('micBtn');if(b){b.classList.remove('rec');b.textContent='🎤';}document.getElementById('vStatus').textContent='माइक दबाओ और बोलो';}
+function startVoiceInput(){
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){return;}
+  const r=new SR();r.lang='hi-IN';r.onresult=e=>{document.getElementById('inp').value=e.results[0][0].transcript;};r.start();
+}
+function speakText(t,cb){
+  if(!window.speechSynthesis){if(cb)cb();return;}
+  try{window.speechSynthesis.cancel();}catch(e){}
+  var clean=t.replace(/<[^>]+>/g,'').replace(/[*#_]/g,'').trim().slice(0,350);
+  if(!clean){if(cb)cb();return;}
+  var attempts=0;
+  var doSpeak=function(){
+    try{
+      var u=new SpeechSynthesisUtterance(clean);
+      u.lang='hi-IN';u.rate=0.9;u.pitch=1.0;u.volume=1;
+      // Best voice dhundo
+      var voices=window.speechSynthesis.getVoices()||[];
+      var hv=null;
+      for(var i=0;i<voices.length;i++){
+        if(voices[i].lang&&(voices[i].lang==='hi-IN'||voices[i].lang==='hi')){hv=voices[i];break;}
+      }
+      if(!hv){for(var i=0;i<voices.length;i++){if(voices[i].lang&&voices[i].lang.includes('IN')){hv=voices[i];break;}}}
+      if(!hv&&voices.length>0){hv=voices[0];}
+      if(hv)u.voice=hv;
+      u.onend=function(){if(cb)cb();};
+      u.onerror=function(e){
+        if(attempts<2){attempts++;setTimeout(doSpeak,500);}
+        else{if(cb)cb();}
+      };
+      window.speechSynthesis.speak(u);
+      // Android Chrome fix: resume if paused
+      var chk=setInterval(function(){
+        if(!window.speechSynthesis.speaking){clearInterval(chk);return;}
+        if(window.speechSynthesis.paused){window.speechSynthesis.resume();}
+      },200);
+      setTimeout(function(){clearInterval(chk);},8000);
+    }catch(e){if(cb)cb();}
+  };
+  // Voices load hone ka wait karo
+  var vs=window.speechSynthesis.getVoices()||[];
+  if(vs.length>0){setTimeout(doSpeak,50);}
+  else{
+    window.speechSynthesis.onvoiceschanged=function(){setTimeout(doSpeak,50);};
+    setTimeout(doSpeak,800);
+  }
+}
+
+function setSty(el,s){document.querySelectorAll('.sty').forEach(b=>b.classList.remove('on'));el.classList.add('on');imgSty=s;}
+async function generateImage(){
+  if(!imgOK()){
+    addMsg('ai','🎨 <strong>Image Limit खत्म!</strong><br>20 मिनट में 10 images की limit पूरी हो गई।<br><small style="opacity:.6">20 मिनट बाद reset होगी।</small>');
+    showTab('chat',document.getElementById('tC'));return;
+  }
+  const prompt=document.getElementById('imgPrompt').value.trim();if(!prompt)return;
+  if(!apiKey){addMsg('ai','🔑 Image के लिए API key चाहिए!');return;}
+  const d=getIL();if(!d.start)d.start=Date.now();d.count=(d.count||0)+1;localStorage.setItem(K.il,JSON.stringify(d));
+  const btn=document.getElementById('genBtn');btn.disabled=true;btn.textContent='⏳ बन रहा है...';
+  document.getElementById('imgResult').style.display='none';
+  try{
+    const full=prompt+(imgSty?' - '+imgSty+' style':'');
+    const url=`https://image.pollinations.ai/prompt/${encodeURIComponent(full)}?width=512&height=512&nologo=true&seed=${Date.now()}`;
+    document.getElementById('genImg').src=url;document.getElementById('imgResult').style.display='block';
+  }catch(e){addMsg('ai','❌ Image error!');}
+  btn.disabled=false;btn.textContent='🎨 Image बनाओ';updateImgTimer();
+}
+function dlImg(){const a=document.createElement('a');a.href=document.getElementById('genImg').src;a.download='myindiaknowledgeai.jpg';a.click();}
+function shareImg(){if(navigator.share)navigator.share({title:'My India Knowledge AI',url:document.getElementById('genImg').src});else navigator.clipboard.writeText(document.getElementById('genImg').src);}
+
+// ══════════════════════════════════════════════
+// FILE ATTACH
+// ══════════════════════════════════════════════
+function togglePlusMenu(){const m=document.getElementById('plusMenu');m.style.display=m.style.display==='block'?'none':'block';}
+function pickFile(accept){const i=document.getElementById('fileInput');i.accept=accept;i.click();document.getElementById('plusMenu').style.display='none';}
+function onFile(e){
+  const file=e.target.files[0];if(!file)return;aFile=file;
+  if(file.type.startsWith('image/')){const r=new FileReader();r.onload=ev=>{const t=document.getElementById('fThumb');t.src=ev.target.result;t.style.display='block';aData=ev.target.result.split(',')[1];};r.readAsDataURL(file);}
+  document.getElementById('fName').textContent=file.name.slice(0,16);
+  document.getElementById('filePreview').style.display='flex';
+}
+function removeFile(){aFile=null;aData=null;document.getElementById('filePreview').style.display='none';document.getElementById('fileInput').value='';}
+
+// ══════════════════════════════════════════════
+// EXPORT
+// ══════════════════════════════════════════════
+function exportChat(type){
+  const ms=sessions[sid]?.msgs||[];
+  const t=ms.map(m=>(m.role==='user'?'आप: ':'AI: ')+m.html.replace(/<[^>]+>/g,'')).join('\n\n');
+  if(type==='copy'){navigator.clipboard.writeText(t);addMsg('ai','✅ Chat copy हो गई!');}
+  else{const b=new Blob([t],{type:'text/plain;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='mika_chat.txt';a.click();}
+}
+function confirmClear(){
+  document.getElementById('secTitle').textContent='🗑️ Clear Chat';
+  document.getElementById('secMsg').textContent='सब messages delete होंगे?';
+  secFn=()=>{sessions[sid].msgs=[];saveSess();showWelcome();};
+  document.getElementById('secModal').style.display='flex';
+  document.getElementById('secOK').onclick=()=>{secFn&&secFn();document.getElementById('secModal').style.display='none';};
+}
+
+// ══════════════════════════════════════════════
+// SIGNUP
+// ══════════════════════════════════════════════
+function sSTab(tab,el){
+  ['e','l','k'].forEach(t=>document.getElementById('s-'+t).style.display=t===tab?'block':'none');
+  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));el.classList.add('on');
+  document.getElementById('sAlert').style.display='none';
+}
+function sAlert(m){const e=document.getElementById('sAlert');e.textContent=m;e.style.display='block';}
+function doSignup(){
+  const name=document.getElementById('sName').value.trim();
+  const email=document.getElementById('sEmail').value.trim();
+  const pass=document.getElementById('sPass').value;
+  if(!name||!email||!pass){sAlert('⚠️ सब भरो!');return;}
+  if(pass.length<6){sAlert('⚠️ Password 6+ अक्षर!');return;}
+  let users={};try{users=JSON.parse(localStorage.getItem(K.users)||'{}');}catch(e){}
+  if(users[email]){sAlert('⚠️ Email पहले से है!');return;}
+  users[email]={name,p:btoa(pass)};localStorage.setItem(K.users,JSON.stringify(users));
+  user={name,email};localStorage.setItem(K.auth,JSON.stringify(user));
+  document.getElementById('signupScreen').style.display='none';
+  document.getElementById('loginBtn').textContent='👤 '+name.split(' ')[0];
+  document.getElementById('pUserNm').textContent=name;
+  localStorage.setItem('mika4_shown','1');
+  addMsg('ai','🎉 Welcome <strong>'+name+'</strong>! My India Knowledge AI में आपका स्वागत है! 🚀');
+}
+function doLogin(){
+  const email=document.getElementById('sLE').value.trim();
+  const pass=document.getElementById('sLP').value;
+  let users={};try{users=JSON.parse(localStorage.getItem(K.users)||'{}');}catch(e){}
+  const u=users[email];
+  if(!u||atob(u.p)!==pass){sAlert('❌ गलत email या password!');return;}
+  user={name:u.name,email};localStorage.setItem(K.auth,JSON.stringify(user));
+  document.getElementById('signupScreen').style.display='none';
+  document.getElementById('loginBtn').textContent='👤 '+u.name.split(' ')[0];
+  document.getElementById('pUserNm').textContent=u.name;
+  addMsg('ai','👋 Welcome back <strong>'+u.name+'</strong>! 🙏');
+}
+function skipLogin(){
+  document.getElementById('signupScreen').style.display='none';
+  document.getElementById('loginBtn').style.display='none';
+  if(!apiKey){
+    setTimeout(function(){
+      addMsg('ai','👋 नमस्ते! AI use करने के लिए Login button दबाओ → API Key डालो! OpenRouter.ai से free key लो 🔑');
+    },500);
+  }
+}
+
+function saveKey(){
+  const k=document.getElementById('sKey').value.trim();
+  if(!k.startsWith('sk-or-')&&!k.startsWith('sk-ant-')&&!k.startsWith('gsk_')){sAlert('⚠️ सही Key डालो!');return;}
+  apiKey=k;
+  // Encrypt before save
+  try{let e='';for(let i=0;i<k.length;i++){e+=String.fromCharCode(k.charCodeAt(i)^73);}sto(K.key,btoa(e));}
+  catch(ex){sto(K.key,k);}
+  document.getElementById('signupScreen').style.display='none';
+  document.getElementById('loginBtn').style.display='none';
+  addMsg('ai','🔑 API Key save! अब AI से बात करो 🚀');
+}
+
+// ══════════════════════════════════════════════
+// ROBOT VOICE BUTTONS
+// ══════════════════════════════════════════════
+function robotSpeak(){
+  const g=getGreet();
+  const msgs2=[
+    'नमस्कार! मैं हूं My India Knowledge AI! ' + g.t + ' में आपकी सेवा में हाजिर हूं!',
+    'नमस्कार! मैं Mahan Roxan Sigma हूं! आपका AI assistant! बताइए क्या मदद करूं?',
+    'जय हिंद! My India Knowledge AI आपकी सेवा में! ' + g.g
+  ];
+  const msg2=msgs2[Math.floor(Math.random()*msgs2.length)];
+  window.speechSynthesis.cancel();
+  setTimeout(()=>{
+    const utt=new SpeechSynthesisUtterance(msg2);
+    utt.lang='hi-IN';utt.rate=0.85;utt.pitch=1;utt.volume=1;
+    // Try to find Hindi voice
+    const voices=window.speechSynthesis.getVoices();
+    const hiVoice=voices.find(v=>v.lang.includes('hi'))||voices.find(v=>v.lang.includes('IN'))||null;
+    if(hiVoice)utt.voice=hiVoice;
+    window.speechSynthesis.speak(utt);
+  },100);
+  const btns=document.querySelectorAll('.rb-btn');
+  if(btns[0]){btns[0].style.background='rgba(255,107,0,.35)';setTimeout(()=>btns[0].style.background='',2000);}
+}
+
+let rbRec=null;
+function robotListen(){
+  const btn=document.getElementById('rbListen');
+  if(rbRec&&rbRec._on){
+    try{rbRec.stop();}catch(e){}
+    rbRec=null;btn.classList.remove('active');btn.textContent='🎤';return;
+  }
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){addMsg('ai','❌ Browser में voice support नहीं!');return;}
+  rbRec=new SR();rbRec.lang='hi-IN';rbRec._on=true;
+  btn.classList.add('active');btn.textContent='⏹';
+  rbRec.onresult=e=>{
+    const t=e.results[0][0].transcript;
+    document.getElementById('inp').value=t;
+    btn.classList.remove('active');btn.textContent='🎤';
+    rbRec=null;send();
+  };
+  rbRec.onerror=()=>{rbRec=null;btn.classList.remove('active');btn.textContent='🎤';};
+  rbRec.onend=()=>{if(rbRec){rbRec=null;btn.classList.remove('active');btn.textContent='🎤';}};
+  rbRec.start();
+}
+
+// ══════════════════════════════════════════════
+// THEME
+// ══════════════════════════════════════════════
+function toggleTheme(){document.body.classList.toggle('light');const l=document.body.classList.contains('light');localStorage.setItem(K.theme,l?'light':'dark');document.getElementById('themeBtn').textContent=l?'🌙':'☀️';}
+
+// ══════════════════════════════════════════════
+// BOARD SYSTEM
+// ══════════════════════════════════════════════
+const BOARD_PASS='789456123';
+const ADMIN_PASS='963852741';
+let currentBoard='';
+
+function openBoardSystem(){document.getElementById('boardSelectScreen').style.display='flex';}
+function verifyBoardPass(){
+  if(document.getElementById('bpInp').value===BOARD_PASS){
+    document.getElementById('boardPassScreen').style.display='none';
+    document.getElementById('bpInp').value='';
+    document.getElementById('boardSelectScreen').style.display='flex';
+  } else {
+    const e=document.getElementById('bpErr');e.textContent='❌ गलत password!';e.style.display='block';setTimeout(()=>e.style.display='none',2000);
+  }
+}
+function openBoard(board){
+  currentBoard=board;
+  document.getElementById('boardSelectScreen').style.display='none';
+  document.getElementById('boardClassScreen').style.display='flex';
+  const title=board==='up'?'🏫 UP Board — Class चुनो':'📖 CBSE Board — Class चुनो';
+  document.getElementById('boardClassTitle').textContent=title;
+  const grid=document.getElementById('classGrid');grid.innerHTML='';
+  for(let i=1;i<=12;i++){
+    const col=i<=5?'rgba(255,107,0,.18)':i<=8?'rgba(255,215,0,.15)':'rgba(0,168,107,.15)';
+    const bc=i<=5?'rgba(255,107,0,.35)':i<=8?'rgba(255,215,0,.35)':'rgba(0,168,107,.35)';
+    const tc=i<=5?'#FF6B00':i<=8?'#FFD700':'#00A86B';
+    const btn=document.createElement('div');
+    btn.style.cssText='background:'+col+';border:2px solid '+bc+';border-radius:10px;padding:12px 6px;text-align:center;cursor:pointer;';
+    btn.innerHTML='<div style="font-family:Nunito,sans-serif;font-size:14px;font-weight:900;color:'+tc+';">Class<br>'+i+'</div>';
+    const cap=i;btn.onclick=()=>openClassBooks(board,cap);
+    grid.appendChild(btn);
+  }
+}
+function openClassBooks(board,cls){
+  document.getElementById('boardClassScreen').style.display='none';
+  document.getElementById('boardBooksScreen').style.display='flex';
+  document.getElementById('booksTitle').textContent=(board==='up'?'🏫 UP Board':'📖 CBSE')+' — Class '+cls;
+  const allBooks=JSON.parse(localStorage.getItem('mika4_books')||'{}');
+  const key=board+'_'+cls;
+  const books=allBooks[key]||[];
+  const list=document.getElementById('booksList');
+  const noMsg=document.getElementById('noBooksMsg');
+  list.innerHTML='';
+  if(!books.length){noMsg.style.display='block';return;}
+  noMsg.style.display='none';
+  books.forEach((b,i)=>{
+    const card=document.createElement('div');
+    card.style.cssText='background:rgba(255,107,0,.06);border:1.5px solid rgba(255,107,0,.15);border-radius:11px;padding:12px;margin-bottom:8px;';
+    card.innerHTML='<div style="font-family:Nunito,sans-serif;font-size:13px;font-weight:900;color:#FFD700;margin-bottom:3px;">📗 '+b.name+'</div>'
+      +'<div style="font-size:10px;color:rgba(255,248,240,.45);">📌 '+b.subject+'</div>'
+      +(b.content?'<div style="margin-top:8px;padding:8px;background:rgba(0,0,0,.2);border-radius:7px;font-size:11px;color:rgba(255,248,240,.6);line-height:1.7;">'+b.content.slice(0,200)+(b.content.length>200?'...':'')+'</div>':'')
+      +'<div style="display:flex;gap:6px;margin-top:8px;">'
+      +'<button onclick="event.stopPropagation();readBookFn('+i+',' + "'"+key+"'" + ')" style="flex:1;background:rgba(255,107,0,.15);border:1px solid rgba(255,107,0,.25);color:#FF6B00;padding:6px;border-radius:7px;font-size:11px;cursor:pointer;font-weight:700;">📖 पढ़ो</button>'
+      +'<button onclick="event.stopPropagation();askAboutBook(' + "'"+b.name+"'," + "'"+b.subject+"'" + ')" style="flex:1;background:rgba(0,168,107,.12);border:1px solid rgba(0,168,107,.22);color:#00A86B;padding:6px;border-radius:7px;font-size:11px;cursor:pointer;font-weight:700;">🤖 AI से पूछो</button>'
+      +'</div>';
+    list.appendChild(card);
+  });
+}
+function readBookFn(idx,key){
+  const allBooks=JSON.parse(localStorage.getItem('mika4_books')||'{}');
+  const b=(allBooks[key]||[])[idx];if(!b)return;
+  // Close all board screens
+  ['boardBooksScreen','boardClassScreen','boardSelectScreen','boardPassScreen'].forEach(id=>{
+    const el=document.getElementById(id);if(el)el.style.display='none';
+  });
+  showTab('chat',document.getElementById('tC'));
+  // Build book card with image + AI question
+  const parts=key.split('_');
+  const board=parts[0]==='up'?'UP Board':'CBSE Board';
+  const cls='Class '+parts[1];
+  const imgUrl='https://via.placeholder.com/300x200/1a1a3e/FF6B00?text='+encodeURIComponent(b.name);
+  const bookCard=`
+<div style="background:rgba(255,107,0,.06);border:1.5px solid rgba(255,107,0,.18);border-radius:13px;overflow:hidden;margin-bottom:6px;">
+  <div style="background:linear-gradient(135deg,rgba(255,107,0,.15),rgba(255,215,0,.08));padding:12px;display:flex;gap:10px;align-items:center;">
+    <div style="width:70px;height:90px;background:linear-gradient(135deg,#FF6B00,#CC3300);border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 4px 12px rgba(255,107,0,.3);">
+      <div style="font-size:24px;">📗</div>
+      <div style="font-size:7px;color:white;font-weight:700;text-align:center;padding:2px;line-height:1.3;">${b.name.slice(0,15)}</div>
+    </div>
+    <div>
+      <div style="font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#FFD700;">${b.name}</div>
+      <div style="font-size:10px;color:rgba(255,248,240,.55);margin-top:3px;">📌 ${b.subject}</div>
+      <div style="font-size:10px;color:rgba(255,248,240,.4);margin-top:2px;">🏫 ${board} • ${cls}</div>
+    </div>
+  </div>
+  <div style="padding:10px 12px;border-top:1px solid rgba(255,107,0,.12);">
+    <div style="font-size:13px;font-weight:700;color:#FFF8F0;margin-bottom:8px;">📖 क्या आपको इस बुक के बारे में जानना है?</div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <button onclick="askBook('${b.name}','${b.subject}','summary')" style="background:rgba(255,107,0,.15);border:1.5px solid rgba(255,107,0,.3);color:#FF6B00;padding:7px 11px;border-radius:9px;font-size:11px;cursor:pointer;font-weight:700;">📝 Summary बताओ</button>
+      <button onclick="askBook('${b.name}','${b.subject}','chapter')" style="background:rgba(255,215,0,.1);border:1.5px solid rgba(255,215,0,.25);color:#FFD700;padding:7px 11px;border-radius:9px;font-size:11px;cursor:pointer;font-weight:700;">📚 Chapter List</button>
+      <button onclick="askBook('${b.name}','${b.subject}','important')" style="background:rgba(0,168,107,.1);border:1.5px solid rgba(0,168,107,.25);color:#00A86B;padding:7px 11px;border-radius:9px;font-size:11px;cursor:pointer;font-weight:700;">⭐ Important Topics</button>
+      <button onclick="askBook('${b.name}','${b.subject}','question')" style="background:rgba(138,43,226,.1);border:1.5px solid rgba(138,43,226,.25);color:#BB88FF;padding:7px 11px;border-radius:9px;font-size:11px;cursor:pointer;font-weight:700;">❓ Questions</button>
+    </div>
+  </div>
+</div>`;
+  addMsg('ai', bookCard);
+  // Speak
+  speakText(b.name + ' book खुल गई! क्या आपको इस बुक के बारे में जानना है?');
+}
+
+function askBook(name, subj, type){
+  const queries={
+    summary: name+' ('+subj+') का पूरा summary बताओ Hindi में',
+    chapter: name+' ('+subj+') के सभी chapters के नाम बताओ',
+    important: name+' ('+subj+') के important topics और exam के लिए जरूरी points बताओ',
+    question: name+' ('+subj+') के important questions और answers बताओ'
+  };
+  document.getElementById('inp').value=queries[type]||name+' के बारे में बताओ';
+  send();
+}
+function askAboutBook(name,subj){
+  document.getElementById('inp').value=name+' ('+subj+') के बारे में बताओ';
+  document.getElementById('boardBooksScreen').style.display='none';
+  document.getElementById('boardClassScreen').style.display='none';
+  document.getElementById('boardSelectScreen').style.display='none';
+  showTab('chat',document.getElementById('tC'));send();
+}
+function openAdminSystem(){document.getElementById('adminPassScreen').style.display='flex';}
+function verifyAdminPass(){
+  if(document.getElementById('apInp').value===ADMIN_PASS){
+    document.getElementById('adminPassScreen').style.display='none';
+    document.getElementById('apInp').value='';
+    document.getElementById('adminScreen').style.display='flex';
+    loadAdminClassOptions();loadAllBooks();
+  } else {
+    const e=document.getElementById('apErr');e.textContent='❌ गलत!';e.style.display='block';setTimeout(()=>e.style.display='none',2000);
+  }
+}
+function loadAdminClassOptions(){
+  const sel=document.getElementById('adClass');sel.innerHTML='<option value="" style="background:#0A0A1E;">-- Class चुनो --</option>';
+  for(let i=1;i<=12;i++)sel.innerHTML+='<option value="'+i+'" style="background:#0A0A1E;">Class '+i+'</option>';
+}
+function addBook(){
+  const board=document.getElementById('adBoard').value;
+  const cls=document.getElementById('adClass').value;
+  const name=document.getElementById('adBook').value.trim();
+  const subj=document.getElementById('adSubject').value.trim();
+  const content=document.getElementById('adContent').value.trim();
+  if(!cls||!name||!subj){const m=document.getElementById('adMsg');m.textContent='⚠️ Class, नाम और subject भरो!';m.style.color='#ff9999';m.style.display='block';return;}
+  const allBooks=JSON.parse(localStorage.getItem('mika4_books')||'{}');
+  const key=board+'_'+cls;
+  if(!allBooks[key])allBooks[key]=[];
+  allBooks[key].push({name,subject:subj,content});
+  localStorage.setItem('mika4_books',JSON.stringify(allBooks));
+  document.getElementById('adBook').value='';document.getElementById('adSubject').value='';document.getElementById('adContent').value='';
+  const m=document.getElementById('adMsg');m.textContent='✅ Book add हो गई!';m.style.color='#00FFB3';m.style.display='block';setTimeout(()=>m.style.display='none',2500);
+  loadAllBooks();
+}
+function loadAllBooks(){
+  const allBooks=JSON.parse(localStorage.getItem('mika4_books')||'{}');
+  const el=document.getElementById('allBooksList');
+  if(!Object.keys(allBooks).length){el.innerHTML='<div style="font-size:11px;color:rgba(255,248,240,.3);text-align:center;padding:10px;">कोई book नहीं है अभी</div>';return;}
+  let h2='';
+  Object.entries(allBooks).forEach(([key,books])=>{
+    if(!books.length)return;
+    const [board,cls]=key.split('_');
+    h2+='<div style="margin-bottom:8px;"><div style="font-size:10px;color:#FF6B00;font-weight:700;margin-bottom:4px;">'+(board==='up'?'UP Board':'CBSE')+' — Class '+cls+'</div>';
+    books.forEach((b,i)=>{h2+='<div style="display:flex;justify-content:space-between;align-items:center;padding:6px 9px;background:rgba(255,255,255,.04);border-radius:7px;margin-bottom:4px;font-size:11px;"><span style="color:rgba(255,248,240,.65);">📗 '+b.name+' ('+b.subject+')</span><span onclick="deleteBook('+'"'+key+'"'+','+i+')" style="cursor:pointer;color:#ff9999;font-size:13px;">🗑️</span></div>';});
+    h2+='</div>';
+  });
+  el.innerHTML=h2;
+}
+function deleteBook(key,idx){
+  const allBooks=JSON.parse(localStorage.getItem('mika4_books')||'{}');
+  if(allBooks[key])allBooks[key].splice(idx,1);
+  localStorage.setItem('mika4_books',JSON.stringify(allBooks));loadAllBooks();
+}
+
+
+function updateLimitDisplay(){
+  // Chat
+  const cl=getCL();const cRem=cl.start?Math.max(0,CHAT_LIMIT-(Date.now()-cl.start)):CHAT_LIMIT;
+  const ch=Math.floor(cRem/3600000),cm=Math.floor((cRem%3600000)/60000),cs=Math.floor((cRem%60000)/1000);
+  const cEl=document.getElementById('lChatTxt');if(cEl)cEl.textContent=ch+':'+String(cm).padStart(2,'0')+':'+String(cs).padStart(2,'0');
+  // Image
+  const il=getIL();const iEl=document.getElementById('lImgTxt');
+  if(iEl)iEl.textContent=(IMG_MAX-(il.count||0))+' बाकी';
+  // Voice
+  const vl=getVL();const vRem=vl.start?Math.max(0,VOICE_LIMIT-(Date.now()-vl.start)):VOICE_LIMIT;
+  const vh=Math.floor(vRem/3600000),vm=Math.floor((vRem%3600000)/60000);
+  const vEl=document.getElementById('lVoiceTxt');if(vEl)vEl.textContent=vh+':'+String(vm).padStart(2,'0')+':00';
+}
+
+
+// ── PLAY LAST AI MESSAGE ──
+function playLastAI(){
+  const bubbles=document.querySelectorAll('.msg.ai .bbl');
+  if(!bubbles.length){speakText('अभी कोई जवाब नहीं है।');return;}
+  const last=bubbles[bubbles.length-1];
+  const txt=last.innerText||last.textContent||'';
+  if(!txt.trim()){speakText('कोई text नहीं मिला।');return;}
+  const btn=document.getElementById('ttsBtn');
+  btn.style.background='rgba(255,107,0,.3)';
+  speakText(txt,()=>{btn.style.background='rgba(255,107,0,.1)';});
+}
+
+// ── LIVE MIC (direct AI conversation) ──
+let liveRec=null;
+function toggleLiveMic(){
+  const btn=document.getElementById('liveBtn');
+  if(liveRec&&liveRec._on){
+    try{liveRec.stop();}catch(e){}
+    liveRec=null;
+    btn.style.background='rgba(0,168,107,.1)';
+    btn.style.borderColor='rgba(0,168,107,.25)';
+    btn.textContent='🎤';
+    return;
+  }
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){addMsg('ai','❌ Browser में voice support नहीं है।');return;}
+  liveRec=new SR();liveRec.lang='hi-IN';liveRec._on=true;liveRec.continuous=false;
+  btn.style.background='rgba(255,0,0,.2)';
+  btn.style.borderColor='rgba(255,0,0,.5)';
+  btn.textContent='⏹';
+  liveRec.onresult=e=>{
+    const t=e.results[0][0].transcript;
+    document.getElementById('inp').value=t;
+    liveRec=null;
+    btn.style.background='rgba(0,168,107,.1)';
+    btn.style.borderColor='rgba(0,168,107,.25)';
+    btn.textContent='🎤';
+    send();
+  };
+  liveRec.onerror=()=>{liveRec=null;btn.style.background='rgba(0,168,107,.1)';btn.textContent='🎤';};
+  liveRec.onend=()=>{if(liveRec){liveRec=null;btn.style.background='rgba(0,168,107,.1)';btn.textContent='🎤';}};
+  liveRec.start();
+}
+
+
+// ══ SOCIAL MEDIA ══
+function openSocialMedia(){
+  document.getElementById('socialPage').style.display='flex';
+  addMsg('ai','📱 <strong>Social Media खुल गया!</strong><br>📺 Long Video या 📱 Short Video — choose करो! 🎬');
+}
+function closeSocialMedia(){
+  document.getElementById('socialPage').style.display='none';
+}
+function openLongVideo(){
+  document.getElementById('socialPage').style.display='none';
+  // YouTube app mein kholo - local file se iframe block hota hai
+  window.open('https://www.youtube.com/channel/UCzwZr7iejaurqq519Fcf9xg?sub_confirmation=1','_blank');
+  addMsg('ai','📺 <strong>YouTube channel खुल रहा है!</strong><br>App में videos देखो। Server आने के बाद website में ही चलेगा! 🎬');
+}
+function openShortVideo(){
+  document.getElementById('socialPage').style.display='none';
+  // YouTube Shorts
+  window.open('https://www.youtube.com/@UCzwZr7iejaurqq519Fcf9xg/shorts','_blank');
+  addMsg('ai','📱 <strong>YouTube Shorts खुल रहे हैं!</strong><br>App में shorts देखो। Server आने के बाद website में ही चलेंगे! 🎬');
+}
+function closeVideoPage(){
+  document.getElementById('ytFrame').src='';
+  document.getElementById('videoPage').style.display='none';
+  document.getElementById('socialPage').style.display='flex';
+}
+</script>
+
+<!-- BOARD PASSWORD SCREEN -->
+<div id="boardPassScreen" style="display:none;position:fixed;inset:0;z-index:800;background:rgba(5,5,16,.98);align-items:center;justify-content:center;padding:18px;">
+  <div style="background:#0A0A1E;border:2px solid rgba(255,215,0,.3);border-radius:18px;padding:24px 18px;max-width:300px;width:100%;text-align:center;">
+    <div style="font-size:40px;margin-bottom:8px;">📚</div>
+    <div style="font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;background:linear-gradient(135deg,#FF6B00,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px;">BOARD BOOKS</div>
+    <div style="font-size:11px;color:rgba(255,248,240,.35);margin-bottom:14px;">Password डालो</div>
+    <div id="bpErr" style="color:#ff9999;font-size:11px;margin-bottom:7px;display:none;"></div>
+    <input id="bpInp" type="password" placeholder="••••••••" maxlength="12"
+      style="width:100%;background:rgba(255,255,255,.05);border:2px solid rgba(255,215,0,.25);border-radius:9px;padding:10px;color:#FFF8F0;font-size:17px;text-align:center;letter-spacing:6px;outline:none;margin-bottom:10px;">
+    <button onclick="verifyBoardPass()" style="width:100%;background:linear-gradient(135deg,#FFD700,#FF6B00);border:none;border-radius:9px;padding:11px;color:#fff;font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;cursor:pointer;margin-bottom:7px;">🔓 Open करो</button>
+    <button onclick="document.getElementById('boardPassScreen').style.display='none'" style="width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,107,0,.1);color:rgba(255,248,240,.3);padding:9px;border-radius:9px;font-size:12px;cursor:pointer;">Cancel</button>
+  </div>
+</div>
+
+<!-- BOARD SELECT SCREEN -->
+<div id="boardSelectScreen" style="display:none;position:fixed;inset:0;z-index:810;background:linear-gradient(160deg,#050510,#0A0820);flex-direction:column;align-items:center;padding:20px;overflow-y:auto;">
+  <div style="width:100%;max-width:360px;">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;padding-top:10px;">
+      <button onclick="document.getElementById('boardSelectScreen').style.display='none'" style="background:rgba(255,107,0,.1);border:1.5px solid rgba(255,107,0,.25);color:#FF6B00;padding:6px 12px;border-radius:8px;font-size:12px;cursor:pointer;font-weight:700;">← वापस</button>
+      <div style="font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;background:linear-gradient(90deg,#FF6B00,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">📚 Board चुनो</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div onclick="openBoard('up')" style="background:rgba(255,107,0,.08);border:2px solid rgba(255,107,0,.25);border-radius:14px;padding:20px;text-align:center;cursor:pointer;">
+        <div style="font-size:32px;margin-bottom:8px;">🏫</div>
+        <div style="font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#FF6B00;">UP BOARD</div>
+        <div style="font-size:10px;color:rgba(255,248,240,.4);margin-top:4px;">उत्तर प्रदेश</div>
+      </div>
+      <div onclick="openBoard('cbse')" style="background:rgba(0,168,107,.08);border:2px solid rgba(0,168,107,.25);border-radius:14px;padding:20px;text-align:center;cursor:pointer;">
+        <div style="font-size:32px;margin-bottom:8px;">📖</div>
+        <div style="font-family:'Nunito',sans-serif;font-size:14px;font-weight:900;color:#00A86B;">CBSE BOARD</div>
+        <div style="font-size:10px;color:rgba(255,248,240,.4);margin-top:4px;">Central Board</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOARD CLASSES SCREEN -->
+<div id="boardClassScreen" style="display:none;position:fixed;inset:0;z-index:820;background:linear-gradient(160deg,#050510,#0A0820);flex-direction:column;padding:15px;overflow-y:auto;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:15px;flex-shrink:0;">
+    <button onclick="document.getElementById('boardClassScreen').style.display='none';document.getElementById('boardSelectScreen').style.display='flex'" style="background:rgba(255,107,0,.1);border:1.5px solid rgba(255,107,0,.25);color:#FF6B00;padding:6px 12px;border-radius:8px;font-size:12px;cursor:pointer;font-weight:700;">← वापस</button>
+    <div id="boardClassTitle" style="font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:#FFD700;">UP Board</div>
+  </div>
+  <div style="font-size:12px;color:rgba(255,248,240,.4);margin-bottom:12px;flex-shrink:0;">Class चुनो 👇</div>
+  <div id="classGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;"></div>
+</div>
+
+<!-- BOARD BOOKS SCREEN -->
+<div id="boardBooksScreen" style="display:none;position:fixed;inset:0;z-index:830;background:linear-gradient(160deg,#050510,#0A0820);flex-direction:column;padding:15px;overflow-y:auto;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:15px;flex-shrink:0;">
+    <button onclick="document.getElementById('boardBooksScreen').style.display='none';document.getElementById('boardClassScreen').style.display='flex'" style="background:rgba(255,107,0,.1);border:1.5px solid rgba(255,107,0,.25);color:#FF6B00;padding:6px 12px;border-radius:8px;font-size:12px;cursor:pointer;font-weight:700;">← वापस</button>
+    <div id="booksTitle" style="font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:#FFD700;"></div>
+  </div>
+  <div id="booksList" style="display:flex;flex-direction:column;gap:8px;"></div>
+  <div id="noBooksMsg" style="display:none;text-align:center;padding:30px;color:rgba(255,248,240,.35);font-size:13px;">
+    अभी कोई book नहीं है।<br><small>Admin panel से add करो।</small>
+  </div>
+</div>
+
+<!-- ADMIN PASSWORD SCREEN -->
+<div id="adminPassScreen" style="display:none;position:fixed;inset:0;z-index:850;background:rgba(5,5,16,.98);align-items:center;justify-content:center;padding:18px;">
+  <div style="background:#0A0A1E;border:2px solid rgba(0,168,107,.3);border-radius:18px;padding:24px 18px;max-width:300px;width:100%;text-align:center;">
+    <div style="font-size:40px;margin-bottom:8px;">⚙️</div>
+    <div style="font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:#00A86B;margin-bottom:4px;">ADMIN PANEL</div>
+    <div style="font-size:11px;color:rgba(255,248,240,.35);margin-bottom:14px;">Admin Password डालो</div>
+    <div id="apErr" style="color:#ff9999;font-size:11px;margin-bottom:7px;display:none;"></div>
+    <input id="apInp" type="password" placeholder="••••••••" maxlength="12"
+      style="width:100%;background:rgba(255,255,255,.05);border:2px solid rgba(0,168,107,.25);border-radius:9px;padding:10px;color:#FFF8F0;font-size:17px;text-align:center;letter-spacing:6px;outline:none;margin-bottom:10px;">
+    <button onclick="verifyAdminPass()" style="width:100%;background:linear-gradient(135deg,#00A86B,#005533);border:none;border-radius:9px;padding:11px;color:#fff;font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;cursor:pointer;margin-bottom:7px;">🔓 Open करो</button>
+    <button onclick="document.getElementById('adminPassScreen').style.display='none'" style="width:100%;background:rgba(255,255,255,.03);border:1px solid rgba(255,107,0,.1);color:rgba(255,248,240,.3);padding:9px;border-radius:9px;font-size:12px;cursor:pointer;">Cancel</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL SCREEN -->
+<div id="adminScreen" style="display:none;position:fixed;inset:0;z-index:860;background:linear-gradient(160deg,#050510,#0A0820);flex-direction:column;padding:15px;overflow-y:auto;">
+  <div style="display:flex;align-items:center;gap:10px;margin-bottom:15px;flex-shrink:0;">
+    <button onclick="document.getElementById('adminScreen').style.display='none'" style="background:rgba(0,168,107,.1);border:1.5px solid rgba(0,168,107,.25);color:#00A86B;padding:6px 12px;border-radius:8px;font-size:12px;cursor:pointer;font-weight:700;">← वापस</button>
+    <div style="font-family:'Nunito',sans-serif;font-size:15px;font-weight:900;color:#00A86B;">⚙️ Admin — Books Add करो</div>
+  </div>
+  <div style="background:rgba(0,168,107,.05);border:1.5px solid rgba(0,168,107,.14);border-radius:12px;padding:14px;margin-bottom:10px;">
+    <div style="font-size:11px;color:rgba(255,248,240,.45);margin-bottom:10px;font-weight:700;">📚 नई Book Add करो</div>
+    <select id="adBoard" style="width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(0,168,107,.2);border-radius:8px;padding:9px;color:#FFF8F0;font-family:'Baloo 2',sans-serif;font-size:12px;outline:none;margin-bottom:8px;-webkit-appearance:none;">
+      <option value="up" style="background:#0A0A1E;">UP Board</option>
+      <option value="cbse" style="background:#0A0A1E;">CBSE Board</option>
+    </select>
+    <select id="adClass" style="width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(0,168,107,.2);border-radius:8px;padding:9px;color:#FFF8F0;font-family:'Baloo 2',sans-serif;font-size:12px;outline:none;margin-bottom:8px;-webkit-appearance:none;">
+      <option value="" style="background:#0A0A1E;">-- Class चुनो --</option>
+    </select>
+    <input id="adBook" placeholder="Book का नाम" style="width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(0,168,107,.2);border-radius:8px;padding:9px;color:#FFF8F0;font-family:'Baloo 2',sans-serif;font-size:12px;outline:none;margin-bottom:8px;">
+    <input id="adSubject" placeholder="Subject (जैसे: Hindi, Math, Science)" style="width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(0,168,107,.2);border-radius:8px;padding:9px;color:#FFF8F0;font-family:'Baloo 2',sans-serif;font-size:12px;outline:none;margin-bottom:8px;">
+    <textarea id="adContent" placeholder="Book की content / notes यहाँ डालो..." style="width:100%;background:rgba(255,255,255,.05);border:1.5px solid rgba(0,168,107,.2);border-radius:8px;padding:9px;color:#FFF8F0;font-family:'Baloo 2',sans-serif;font-size:12px;outline:none;resize:none;min-height:80px;margin-bottom:8px;"></textarea>
+    <button onclick="addBook()" style="width:100%;background:linear-gradient(135deg,#00A86B,#005533);border:none;border-radius:9px;padding:11px;color:#fff;font-family:'Nunito',sans-serif;font-size:13px;font-weight:900;cursor:pointer;">✅ Add करो</button>
+    <div id="adMsg" style="margin-top:8px;font-size:11px;color:#00FFB3;display:none;text-align:center;"></div>
+  </div>
+  <div style="background:rgba(255,107,0,.04);border:1.5px solid rgba(255,107,0,.12);border-radius:12px;padding:14px;">
+    <div style="font-size:11px;color:rgba(255,248,240,.45);margin-bottom:8px;font-weight:700;">📋 सभी Books</div>
+    <div id="allBooksList"></div>
+  </div>
+</div>
+
+<!-- SOCIAL MEDIA PAGE -->
+<div id="socialPage" style="display:none;position:fixed;inset:0;z-index:400;background:#050510;flex-direction:column;">
+  <div style="flex-shrink:0;display:flex;align-items:center;gap:10px;padding:12px 14px;background:rgba(5,5,16,.97);border-bottom:2px solid #FF6B00;">
+    <button onclick="closeSocialMedia()" style="width:36px;height:36px;background:rgba(255,107,0,.15);border:1.5px solid rgba(255,107,0,.4);border-radius:8px;color:#FF6B00;font-size:18px;cursor:pointer;">←</button>
+    <div style="flex:1;">
+      <div style="font-size:13px;font-weight:900;color:#FF6B00;">📱 My India — Social Media</div>
+      <div style="font-size:9px;color:rgba(255,248,240,.3);">Videos देखो • Entertainment</div>
+    </div>
+  </div>
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:20px;">
+    <div style="font-size:16px;font-weight:900;color:#FFD700;text-align:center;">क्या देखना है? 🎬</div>
+    <!-- Long Video Button -->
+    <div onclick="openLongVideo()" style="width:100%;max-width:300px;background:linear-gradient(135deg,rgba(255,0,0,.15),rgba(200,0,0,.08));border:2px solid rgba(255,50,50,.5);border-radius:16px;padding:24px 20px;text-align:center;cursor:pointer;transition:all .2s;" onmousedown="this.style.transform='scale(.97)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.97)'" ontouchend="this.style.transform='scale(1)'">
+      <div style="font-size:44px;margin-bottom:8px;">📺</div>
+      <div style="font-size:16px;font-weight:900;color:#FF4444;">Long Videos</div>
+      <div style="font-size:11px;color:rgba(255,248,240,.4);margin-top:4px;">YouTube App में खुलेगा 📱</div>
+    </div>
+    <!-- Short Video Button -->
+    <div onclick="openShortVideo()" style="width:100%;max-width:300px;background:linear-gradient(135deg,rgba(0,168,107,.15),rgba(0,100,60,.08));border:2px solid rgba(0,168,107,.5);border-radius:16px;padding:24px 20px;text-align:center;cursor:pointer;" onmousedown="this.style.transform='scale(.97)'" onmouseup="this.style.transform='scale(1)'" ontouchstart="this.style.transform='scale(.97)'" ontouchend="this.style.transform='scale(1)'">
+      <div style="font-size:44px;margin-bottom:8px;">📱</div>
+      <div style="font-size:16px;font-weight:900;color:#00FF88;">Short Videos</div>
+      <div style="font-size:11px;color:rgba(255,248,240,.4);margin-top:4px;">YouTube Shorts App में 📱</div>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO PLAYER PAGE -->
+<div id="videoPage" style="display:none;position:fixed;inset:0;z-index:500;background:#000;flex-direction:column;">
+  <div style="flex-shrink:0;display:flex;align-items:center;gap:10px;padding:10px 12px;background:rgba(0,0,0,.95);border-bottom:1px solid rgba(255,107,0,.3);">
+    <button onclick="closeVideoPage()" style="width:34px;height:34px;background:rgba(255,107,0,.15);border:1.5px solid rgba(255,107,0,.3);border-radius:7px;color:#FF6B00;font-size:16px;cursor:pointer;">←</button>
+    <div id="vidTitle" style="font-size:12px;font-weight:700;color:#FF6B00;flex:1;">📺 Videos</div>
+  </div>
+  <div style="flex:1;overflow:hidden;">
+    <iframe id="ytFrame" src="" style="width:100%;height:100%;border:none;" allowfullscreen allow="autoplay; encrypted-media; fullscreen" sandbox="allow-scripts allow-same-origin allow-presentation allow-popups allow-forms"></iframe>
+  </div>
+</div>
+
+<!-- UPLOAD PORTAL PANEL (Embedded) -->
+<div id="uploadPanel" style="display:none;position:fixed;inset:0;z-index:500;background:#050510;flex-direction:column;overflow-y:auto;">
+  <div style="position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:10px;padding:11px 13px;background:rgba(5,5,16,.97);border-bottom:2px solid #FF6B00;">
+    <button onclick="closeUploadPanel()" style="width:36px;height:36px;background:rgba(255,107,0,.15);border:1.5px solid rgba(255,107,0,.4);border-radius:8px;color:#FF6B00;font-size:18px;cursor:pointer;">←</button>
+    <div style="font-size:13px;font-weight:900;color:#FF6B00;">📚 Book Upload Portal</div>
+  </div>
+  <div style="padding:12px;">
+    <div class="tc"></div>
+<div class="hdr">
+  <h1>📚 Data Upload Portal</h1>
+  <p>My India Knowledge AI — Books & Content</p>
+</div>
+<button class="back" onclick="window.close()">← वापस जाओ</button>
+
+<div class="card">
+  <div class="sec-title">📖 नई Book Add करो</div>
+  <div class="lbl">Board</div>
+  <select id="board"><option value="up">UP Board</option><option value="cbse">CBSE Board</option></select>
+  <div class="lbl">Class</div>
+  <select id="cls"><option value="">-- Class चुनो --</option></select>
+  <div class="lbl">Book का नाम</div>
+  <input id="bname" placeholder="जैसे: Hindi Bhasha Bharti">
+  <div class="lbl">Subject</div>
+  <input id="bsub" placeholder="जैसे: Hindi, Math, Science">
+  <div class="lbl">Content / Notes</div>
+  <textarea id="bcont" placeholder="Book की summary, chapters, notes यहाँ डालो..."></textarea>
+  <div id="bmsg" class="msg"></div>
+  <button class="btn" onclick="addBook()">✅ Book Add करो</button>
+</div>
+
+<div class="card">
+  <div class="sec-title">📋 सभी Books</div>
+  <select id="filterBoard" onchange="loadBooks()" style="margin-bottom:8px"><option value="">-- सब Boards --</option><option value="up">UP Board</option><option value="cbse">CBSE</option></select>
+  <div id="booksList"></div>
+</div>
+
+<script>
+const KEY='mika4_books';
+for(let i=1;i<=12;i++){document.getElementById('cls').innerHTML+=`<option value="${i}">Class ${i}</option>`;}
+function getBooks(){try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return{};}}
+function saveBooks(b){localStorage.setItem(KEY,JSON.stringify(b));}
+function addBook(){
+  const board=document.getElementById('board').value;
+  const cls=document.getElementById('cls').value;
+  const name=document.getElementById('bname').value.trim();
+  const sub=document.getElementById('bsub').value.trim();
+  const cont=document.getElementById('bcont').value.trim();
+  const msg=document.getElementById('bmsg');
+  if(!cls||!name||!sub){msg.className='msg err';msg.textContent='❌ Class, नाम और subject भरो!';msg.style.display='block';return;}
+  const books=getBooks();const k=board+'_'+cls;
+  if(!books[k])books[k]=[];
+  books[k].push({name,subject:sub,content:cont,date:new Date().toLocaleDateString('hi-IN')});
+  saveBooks(books);
+  document.getElementById('bname').value='';document.getElementById('bsub').value='';document.getElementById('bcont').value='';
+  msg.className='msg ok';msg.textContent='✅ Book add हो गई!';msg.style.display='block';
+  setTimeout(()=>msg.style.display='none',2500);
+  loadBooks();
+}
+function loadBooks(){
+  const books=getBooks();const fb=document.getElementById('filterBoard').value;
+  const el=document.getElementById('booksList');let html='';
+  Object.entries(books).forEach(([k,list])=>{
+    const [b,c]=k.split('_');
+    if(fb&&b!==fb)return;
+    if(!list.length)return;
+    html+=`<div style="font-size:10px;color:#FF6B00;font-weight:700;margin:8px 0 4px;">${b==='up'?'UP Board':'CBSE'} — Class ${c}</div>`;
+    list.forEach((book,i)=>{html+=`<div class="list-item"><span>📗 ${book.name} (${book.subject})</span><span class="del" onclick="delBook('${k}',${i})">🗑️</span></div>`;});
+  });
+  if(!html)html='<div style="font-size:11px;color:rgba(255,248,240,.3);text-align:center;padding:15px;">कोई book नहीं है</div>';
+  el.innerHTML=html;
+}
+function delBook(k,i){const books=getBooks();if(books[k])books[k].splice(i,1);saveBooks(books);loadBooks();}
+loadBooks();
+
+function openUploadPanel(){
+  // Close data modal if open
+  var dm=document.getElementById('dataModal');
+  if(dm)dm.style.display='none';
+  document.getElementById('uploadPanel').style.display='flex';
+  // Init portal if needed
+  if(typeof loadBooks==='function')loadBooks();
+}
+function closeUploadPanel(){
+  document.getElementById('uploadPanel').style.display='none';
+  // Reload books in main app
+  if(typeof loadBooks==='function')loadBooks();
+  addMsg('ai','✅ <strong>Books save हो गईं!</strong> अब user पढ़ाई कर सकता है 📚');
+}
+
+// ══ DEVICE SECURITY ══
+function getDeviceId(){
+  var fp=[navigator.userAgent,navigator.language,screen.width+'x'+screen.height,new Date().getTimezoneOffset()].join('|');
+  var h=0;for(var i=0;i<fp.length;i++){h=((h<<5)-h)+fp.charCodeAt(i);h|=0;}
+  return Math.abs(h).toString(36);
+}
+function checkDevice(){
+  var saved=localStorage.getItem('mika4_dev');
+  var curr=getDeviceId();
+  if(!saved){localStorage.setItem('mika4_dev',curr);return true;}
+  return saved===curr;
+}
+
+// ══ INACTIVITY LOCK ══
+var lastAct=Date.now();
+var INACT=30*60*1000; // 30 min
+document.addEventListener('touchstart',function(){lastAct=Date.now();});
+document.addEventListener('click',function(){lastAct=Date.now();});
+setInterval(function(){
+  if(apiKey&&Date.now()-lastAct>INACT){
+    apiKey='';
+    addMsg('ai','🔒 <strong>30 मिनट inactive</strong> — Security lock! API Key reset। फिर से Login करो।');
+    document.getElementById('loginBtn').style.display='flex';
+  }
+},60000);
+</script>
+  </div>
+</div>
+</body>
+</html>
